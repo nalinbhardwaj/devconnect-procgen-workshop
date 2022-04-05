@@ -48,22 +48,6 @@ export type WorldCoords = {
   y: number;
 };
 
-export interface FuncABI {
-  name: string;
-  type: string;
-  inputs: { name: string; type: string }[];
-  stateMutability: string;
-  payable: boolean;
-  constant: any;
-}
-
-export type TileContractMetaData = {
-  emoji: string;
-  name: string;
-  description: string;
-  extendedAbi: FuncABI[];
-};
-
 export type Tile = {
   coords: WorldCoords;
   perlin: [number, number];
@@ -71,16 +55,6 @@ export type Tile = {
   tileType: TileType;
   temperatureType: TemperatureType;
   altitudeType: AltitudeType;
-  owner: EthAddress;
-  smartContract: EthAddress;
-  smartContractMetaData: TileContractMetaData;
-};
-
-export type PlayerInfo = {
-  coords: WorldCoords;
-  proxyAddress: EthAddress;
-  realAddress: EthAddress;
-  emoji: string;
 };
 
 /**

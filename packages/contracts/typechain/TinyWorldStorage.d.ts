@@ -181,17 +181,11 @@ export class TinyWorldStorage extends Contract {
       tileType: number;
       temperatureType: number;
       altitudeType: number;
-      owner: string;
-      smartContract: string;
-      lastPurchased: BigNumber;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
       2: number;
       3: number;
       4: number;
-      5: string;
-      6: string;
-      7: BigNumber;
     }>;
 
     "cachedTiles(uint256,uint256)"(
@@ -204,17 +198,11 @@ export class TinyWorldStorage extends Contract {
       tileType: number;
       temperatureType: number;
       altitudeType: number;
-      owner: string;
-      smartContract: string;
-      lastPurchased: BigNumber;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
       2: number;
       3: number;
       4: number;
-      5: string;
-      6: string;
-      7: BigNumber;
     }>;
 
     getCachedTile(
@@ -228,18 +216,12 @@ export class TinyWorldStorage extends Contract {
         tileType: number;
         temperatureType: number;
         altitudeType: number;
-        owner: string;
-        smartContract: string;
-        lastPurchased: BigNumber;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
         1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
         4: number;
         5: number;
-        6: string;
-        7: string;
-        8: BigNumber;
       };
     }>;
 
@@ -254,18 +236,12 @@ export class TinyWorldStorage extends Contract {
         tileType: number;
         temperatureType: number;
         altitudeType: number;
-        owner: string;
-        smartContract: string;
-        lastPurchased: BigNumber;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
         1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
         4: number;
         5: number;
-        6: string;
-        7: string;
-        8: BigNumber;
       };
     }>;
 
@@ -309,18 +285,12 @@ export class TinyWorldStorage extends Contract {
         tileType: number;
         temperatureType: number;
         altitudeType: number;
-        owner: string;
-        smartContract: string;
-        lastPurchased: BigNumber;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
         1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
         4: number;
         5: number;
-        6: string;
-        7: string;
-        8: BigNumber;
       }[];
     }>;
 
@@ -332,18 +302,12 @@ export class TinyWorldStorage extends Contract {
         tileType: number;
         temperatureType: number;
         altitudeType: number;
-        owner: string;
-        smartContract: string;
-        lastPurchased: BigNumber;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
         1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
         4: number;
         5: number;
-        6: string;
-        7: string;
-        8: BigNumber;
       }[];
     }>;
 
@@ -510,17 +474,11 @@ export class TinyWorldStorage extends Contract {
     tileType: number;
     temperatureType: number;
     altitudeType: number;
-    owner: string;
-    smartContract: string;
-    lastPurchased: BigNumber;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
     1: BigNumber;
     2: number;
     3: number;
     4: number;
-    5: string;
-    6: string;
-    7: BigNumber;
   }>;
 
   "cachedTiles(uint256,uint256)"(
@@ -533,17 +491,11 @@ export class TinyWorldStorage extends Contract {
     tileType: number;
     temperatureType: number;
     altitudeType: number;
-    owner: string;
-    smartContract: string;
-    lastPurchased: BigNumber;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
     1: BigNumber;
     2: number;
     3: number;
     4: number;
-    5: string;
-    6: string;
-    7: BigNumber;
   }>;
 
   getCachedTile(
@@ -556,18 +508,12 @@ export class TinyWorldStorage extends Contract {
     tileType: number;
     temperatureType: number;
     altitudeType: number;
-    owner: string;
-    smartContract: string;
-    lastPurchased: BigNumber;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
     1: [BigNumber, BigNumber];
     2: BigNumber;
     3: number;
     4: number;
     5: number;
-    6: string;
-    7: string;
-    8: BigNumber;
   }>;
 
   "getCachedTile(tuple)"(
@@ -580,18 +526,12 @@ export class TinyWorldStorage extends Contract {
     tileType: number;
     temperatureType: number;
     altitudeType: number;
-    owner: string;
-    smartContract: string;
-    lastPurchased: BigNumber;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
     1: [BigNumber, BigNumber];
     2: BigNumber;
     3: number;
     4: number;
     5: number;
-    6: string;
-    7: string;
-    8: BigNumber;
   }>;
 
   getPlayerIds(overrides?: CallOverrides): Promise<string[]>;
@@ -628,18 +568,12 @@ export class TinyWorldStorage extends Contract {
       tileType: number;
       temperatureType: number;
       altitudeType: number;
-      owner: string;
-      smartContract: string;
-      lastPurchased: BigNumber;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: [BigNumber, BigNumber];
       2: BigNumber;
       3: number;
       4: number;
       5: number;
-      6: string;
-      7: string;
-      8: BigNumber;
     }[]
   >;
 
@@ -653,18 +587,12 @@ export class TinyWorldStorage extends Contract {
       tileType: number;
       temperatureType: number;
       altitudeType: number;
-      owner: string;
-      smartContract: string;
-      lastPurchased: BigNumber;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: [BigNumber, BigNumber];
       2: BigNumber;
       3: number;
       4: number;
       5: number;
-      6: string;
-      7: string;
-      8: BigNumber;
     }[]
   >;
 
@@ -779,17 +707,11 @@ export class TinyWorldStorage extends Contract {
       tileType: number;
       temperatureType: number;
       altitudeType: number;
-      owner: string;
-      smartContract: string;
-      lastPurchased: BigNumber;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
       2: number;
       3: number;
       4: number;
-      5: string;
-      6: string;
-      7: BigNumber;
     }>;
 
     "cachedTiles(uint256,uint256)"(
@@ -802,17 +724,11 @@ export class TinyWorldStorage extends Contract {
       tileType: number;
       temperatureType: number;
       altitudeType: number;
-      owner: string;
-      smartContract: string;
-      lastPurchased: BigNumber;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
       2: number;
       3: number;
       4: number;
-      5: string;
-      6: string;
-      7: BigNumber;
     }>;
 
     getCachedTile(
@@ -825,18 +741,12 @@ export class TinyWorldStorage extends Contract {
       tileType: number;
       temperatureType: number;
       altitudeType: number;
-      owner: string;
-      smartContract: string;
-      lastPurchased: BigNumber;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: [BigNumber, BigNumber];
       2: BigNumber;
       3: number;
       4: number;
       5: number;
-      6: string;
-      7: string;
-      8: BigNumber;
     }>;
 
     "getCachedTile(tuple)"(
@@ -849,18 +759,12 @@ export class TinyWorldStorage extends Contract {
       tileType: number;
       temperatureType: number;
       altitudeType: number;
-      owner: string;
-      smartContract: string;
-      lastPurchased: BigNumber;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: [BigNumber, BigNumber];
       2: BigNumber;
       3: number;
       4: number;
       5: number;
-      6: string;
-      7: string;
-      8: BigNumber;
     }>;
 
     getPlayerIds(overrides?: CallOverrides): Promise<string[]>;
@@ -897,18 +801,12 @@ export class TinyWorldStorage extends Contract {
         tileType: number;
         temperatureType: number;
         altitudeType: number;
-        owner: string;
-        smartContract: string;
-        lastPurchased: BigNumber;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
         1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
         4: number;
         5: number;
-        6: string;
-        7: string;
-        8: BigNumber;
       }[]
     >;
 
@@ -922,18 +820,12 @@ export class TinyWorldStorage extends Contract {
         tileType: number;
         temperatureType: number;
         altitudeType: number;
-        owner: string;
-        smartContract: string;
-        lastPurchased: BigNumber;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
         1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
         4: number;
         5: number;
-        6: string;
-        7: string;
-        8: BigNumber;
       }[]
     >;
 

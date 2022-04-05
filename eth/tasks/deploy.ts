@@ -7,9 +7,6 @@ import type {
   TinyWorldGetters,
   TinyWorldCoreReturn,
   LibraryContracts,
-  StubTileContract,
-  TinyWorldRegistry,
-  TileContracts,
   Perlin,
 } from '../task-types';
 import * as prettier from 'prettier';
@@ -27,7 +24,6 @@ async function deploy(_args: {}, hre: HardhatRuntimeEnvironment) {
   const libraries: LibraryContracts = await hre.run('deploy:libraries');
   // deploy the core contract
   const tinyWorldCoreReturn: TinyWorldCoreReturn = await hre.run('deploy:core', {
-    registryAddress: libraries.registry.address,
     perlinAddress: libraries.perlin.address,
   });
 
@@ -38,22 +34,12 @@ async function deploy(_args: {}, hre: HardhatRuntimeEnvironment) {
     coreAddress,
   });
 
-  const tileContracts: TileContracts = await hre.run('deploy:tileContracts', {
-    coreAddress,
-    perlinAddress: libraries.perlin.address,
-  });
-
   const gettersAddress = tinyWorldGetters.address;
 
   await hre.run('deploy:save', {
     coreBlockNumber: tinyWorldCoreReturn.blockNumber,
-    registryAddress: libraries.registry.address,
     coreAddress,
     gettersAddress,
-    testTileContractAddress: tileContracts.testTileContract.address,
-    tinyFishContractAddress: tileContracts.tinyFishingContract.address,
-    tinyFarmContractAddress: tileContracts.tinyFarmContract.address,
-    tinyMineContractAddress: tileContracts.tinyMineContract.address,
   });
 
   // give all contract administration over to an admin address if was provided
@@ -71,11 +57,6 @@ async function deploySave(
     coreBlockNumber: number;
     coreAddress: string;
     gettersAddress: string;
-    registryAddress: string;
-    testTileContractAddress: string;
-    tinyFishContractAddress: string;
-    tinyFarmContractAddress: string;
-    tinyMineContractAddress: string;
   },
   hre: HardhatRuntimeEnvironment
 ) {
@@ -128,17 +109,6 @@ async function deploySave(
    * The address for the TinyWorldGetters contract.
    */
   export const GETTERS_CONTRACT_ADDRESS = '${args.gettersAddress}';
-  /**
-   * The address for the TinyWorldRegistry contract.
-   */
-  export const REGISTRY_CONTRACT_ADDRESS = '${args.registryAddress}';
-  /**
-   * The addresses for the Tile contracts.
-   */
-   export const TESTING_CONTRACT_ADDRESS = '${args.testTileContractAddress}';
-   export const FISHING_CONTRACT_ADDRESS = '${args.tinyFishContractAddress}';
-   export const FARM_CONTRACT_ADDRESS = '${args.tinyFarmContractAddress}';
-   export const MINE_CONTRACT_ADDRESS = '${args.tinyMineContractAddress}';
    `,
     { ...options, parser: 'babel-ts' }
   );
@@ -153,24 +123,17 @@ async function deployLibraries({}, hre: HardhatRuntimeEnvironment): Promise<Libr
   const perlin = await PerlinContract.deploy();
   await perlin.deployTransaction.wait();
 
-  const TinyWorldRegistry = await hre.ethers.getContractFactory('TinyWorldRegistry');
-  const registry = await TinyWorldRegistry.deploy();
-  await registry.deployTransaction.wait();
-
   return {
-    registry: registry as TinyWorldRegistry,
     perlin: perlin as Perlin,
   };
 }
 
 subtask('deploy:core', 'deploy and return tokens contract')
-  .addParam('registryAddress', '', undefined, types.string)
   .addParam('perlinAddress', '', undefined, types.string)
   .setAction(deployCore);
 
 async function deployCore(
   args: {
-    registryAddress: string;
     perlinAddress: string;
   },
   hre: HardhatRuntimeEnvironment
@@ -186,7 +149,6 @@ async function deployCore(
       hre.initializers.SEED_1,
       hre.initializers.WORLD_WIDTH,
       hre.initializers.WORLD_SCALE,
-      args.registryAddress,
     ],
     // Linking external libraries like `DarkForestUtils` is not yet supported, or
     // skip this check with the `unsafeAllowLinkedLibraries` flag
@@ -224,46 +186,6 @@ async function deployGetters(
     retries: 5,
     hre,
   });
-}
-
-subtask('deploy:tileContracts', 'deploy and return tile contracts')
-  .addParam('coreAddress', '', undefined, types.string)
-  .addParam('perlinAddress', '', undefined, types.string)
-  .setAction(deployTileContracts);
-
-async function deployTileContracts(
-  args: {
-    coreAddress: string;
-    perlinAddress: string;
-  },
-  hre: HardhatRuntimeEnvironment
-): Promise<TileContracts> {
-  const TileContractFactory = await hre.ethers.getContractFactory('TestTileContract');
-  const tileContract = await TileContractFactory.deploy();
-  await tileContract.deployTransaction.wait();
-
-  const TinyFishingContractFactory = await hre.ethers.getContractFactory('TinyFish');
-  const tinyFishingContract = await TinyFishingContractFactory.deploy(args.coreAddress);
-  await tinyFishingContract.deployTransaction.wait();
-
-  const TinyFarmContractFactory = await hre.ethers.getContractFactory('TinyFarm');
-  const tinyFarmContract = await TinyFarmContractFactory.deploy(args.coreAddress);
-  await tinyFarmContract.deployTransaction.wait();
-
-  const TinyMineContractFactory = await hre.ethers.getContractFactory('TinyMine', {
-    libraries: {
-      Perlin: args.perlinAddress,
-    },
-  });
-  const tinyMineContract = await TinyMineContractFactory.deploy(args.coreAddress);
-  await tinyMineContract.deployTransaction.wait();
-
-  return {
-    testTileContract: tileContract as StubTileContract,
-    tinyFishingContract: tinyFishingContract as StubTileContract,
-    tinyFarmContract: tinyFarmContract as StubTileContract,
-    tinyMineContract: tinyMineContract as StubTileContract,
-  };
 }
 
 async function deployProxyWithRetry<C extends Contract>({

@@ -19,89 +19,6 @@
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "components": [
-          { "internalType": "uint256", "name": "x", "type": "uint256" },
-          { "internalType": "uint256", "name": "y", "type": "uint256" }
-        ],
-        "indexed": false,
-        "internalType": "struct Coords",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "name": "PlayerUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "components": [
-          {
-            "components": [
-              { "internalType": "uint256", "name": "x", "type": "uint256" },
-              { "internalType": "uint256", "name": "y", "type": "uint256" }
-            ],
-            "internalType": "struct Coords",
-            "name": "coords",
-            "type": "tuple"
-          },
-          {
-            "internalType": "uint256[2]",
-            "name": "perlin",
-            "type": "uint256[2]"
-          },
-          {
-            "internalType": "uint256",
-            "name": "raritySeed",
-            "type": "uint256"
-          },
-          {
-            "internalType": "enum TileType",
-            "name": "tileType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "enum TemperatureType",
-            "name": "temperatureType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "enum AltitudeType",
-            "name": "altitudeType",
-            "type": "uint8"
-          },
-          { "internalType": "address", "name": "owner", "type": "address" },
-          {
-            "internalType": "address",
-            "name": "smartContract",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "lastPurchased",
-            "type": "uint256"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct Tile",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "name": "TileUpdated",
-    "type": "event"
-  },
-  {
     "inputs": [
       { "internalType": "uint256", "name": "", "type": "uint256" },
       { "internalType": "uint256", "name": "", "type": "uint256" }
@@ -128,10 +45,7 @@
         "internalType": "enum AltitudeType",
         "name": "altitudeType",
         "type": "uint8"
-      },
-      { "internalType": "address", "name": "owner", "type": "address" },
-      { "internalType": "address", "name": "smartContract", "type": "address" },
-      { "internalType": "uint256", "name": "lastPurchased", "type": "uint256" }
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -144,37 +58,16 @@
           { "internalType": "uint256", "name": "y", "type": "uint256" }
         ],
         "internalType": "struct Coords",
-        "name": "a",
+        "name": "coords",
         "type": "tuple"
       },
       {
-        "components": [
-          { "internalType": "uint256", "name": "x", "type": "uint256" },
-          { "internalType": "uint256", "name": "y", "type": "uint256" }
-        ],
-        "internalType": "struct Coords",
-        "name": "b",
-        "type": "tuple"
+        "internalType": "enum TileType",
+        "name": "localTileType",
+        "type": "uint8"
       }
     ],
-    "name": "dist",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "components": [
-          { "internalType": "uint256", "name": "x", "type": "uint256" },
-          { "internalType": "uint256", "name": "y", "type": "uint256" }
-        ],
-        "internalType": "struct Coords",
-        "name": "coords",
-        "type": "tuple"
-      }
-    ],
-    "name": "forceTileUpdate",
+    "name": "confirmTile",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -228,17 +121,6 @@
             "internalType": "enum AltitudeType",
             "name": "altitudeType",
             "type": "uint8"
-          },
-          { "internalType": "address", "name": "owner", "type": "address" },
-          {
-            "internalType": "address",
-            "name": "smartContract",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "lastPurchased",
-            "type": "uint256"
           }
         ],
         "internalType": "struct Tile",
@@ -344,17 +226,6 @@
             "internalType": "enum AltitudeType",
             "name": "altitudeType",
             "type": "uint8"
-          },
-          { "internalType": "address", "name": "owner", "type": "address" },
-          {
-            "internalType": "address",
-            "name": "smartContract",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "lastPurchased",
-            "type": "uint256"
           }
         ],
         "internalType": "struct Tile",
@@ -404,17 +275,6 @@
             "internalType": "enum AltitudeType",
             "name": "altitudeType",
             "type": "uint8"
-          },
-          { "internalType": "address", "name": "owner", "type": "address" },
-          {
-            "internalType": "address",
-            "name": "smartContract",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "lastPurchased",
-            "type": "uint256"
           }
         ],
         "internalType": "struct Tile[]",
@@ -426,59 +286,12 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "string", "name": "repr", "type": "string" }],
-    "name": "initPlayerLocation",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       { "internalType": "uint256", "name": "_seed", "type": "uint256" },
       { "internalType": "uint256", "name": "_worldWidth", "type": "uint256" },
-      { "internalType": "uint256", "name": "_worldScale", "type": "uint256" },
-      {
-        "internalType": "address",
-        "name": "_registryAddress",
-        "type": "address"
-      }
+      { "internalType": "uint256", "name": "_worldScale", "type": "uint256" }
     ],
     "name": "initialize",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "components": [
-          { "internalType": "uint256", "name": "x", "type": "uint256" },
-          { "internalType": "uint256", "name": "y", "type": "uint256" }
-        ],
-        "internalType": "struct Coords",
-        "name": "coords",
-        "type": "tuple"
-      }
-    ],
-    "name": "movePlayer",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "components": [
-          { "internalType": "uint256", "name": "x", "type": "uint256" },
-          { "internalType": "uint256", "name": "y", "type": "uint256" }
-        ],
-        "internalType": "struct Coords",
-        "name": "coords",
-        "type": "tuple"
-      },
-      { "internalType": "address", "name": "smartContract", "type": "address" }
-    ],
-    "name": "ownTile",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -530,19 +343,6 @@
   },
   {
     "inputs": [],
-    "name": "registry",
-    "outputs": [
-      {
-        "internalType": "contract TinyWorldRegistry",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -570,24 +370,6 @@
       { "internalType": "address", "name": "newOwner", "type": "address" }
     ],
     "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "components": [
-          { "internalType": "uint256", "name": "x", "type": "uint256" },
-          { "internalType": "uint256", "name": "y", "type": "uint256" }
-        ],
-        "internalType": "struct Coords",
-        "name": "coords",
-        "type": "tuple"
-      },
-      { "internalType": "address", "name": "newOwner", "type": "address" }
-    ],
-    "name": "transferTile",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

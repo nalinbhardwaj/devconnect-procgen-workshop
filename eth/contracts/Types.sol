@@ -37,9 +37,6 @@ struct Tile {
     TileType tileType;
     TemperatureType temperatureType;
     AltitudeType altitudeType;
-    address owner;
-    address smartContract;
-    uint256 lastPurchased;
 }
 
 struct Coords {
