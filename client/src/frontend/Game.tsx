@@ -1,20 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import tinycolor from 'tinycolor2';
-import { CORE_CONTRACT_ADDRESS } from 'common-contracts';
 import GameManager from '../backend/GameManager';
-import { EthConnection } from 'exgrasia-network';
-import { getEthConnection } from '../backend/Blockchain';
-import {
-  address,
-  DEV_TEST_PRIVATE_KEY,
-  EthAddress,
-  Tile,
-  TileType,
-  WorldCoords,
-} from 'common-types';
+import { Tile, TileType, WorldCoords } from 'common-types';
 import { tileTypeToColor } from '../utils';
-import { useLocation, useParams } from 'react-router-dom';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Tooltip, Text, Loading, Grid, Card } from '@nextui-org/react';
 
@@ -31,26 +20,8 @@ export default function Game() {
   const [step, setStep] = useState(LoadingStep.NONE);
   const [error, setError] = useState('no errors');
   const [tiles, setTiles] = useState<Tile[][]>([]);
-  const privateKey = DEV_TEST_PRIVATE_KEY[0];
 
   useEffect(() => {
-    /*
-    getEthConnection()
-      .then(async (ethConnection) => {
-        ethConnection.setAccount(privateKey);
-        setEthConnection(ethConnection);
-        setStep(LoadingStep.LOADED_ETH_CONNECTION);
-        const gm = await GameManager.create(ethConnection);
-        window.gm = gm;
-        setGameManager(gm);
-        setStep(LoadingStep.LOADED_GAME_MANAGER);
-        setTiles(gm ? gm.getTiles() : []);
-      })
-      .catch((e) => {
-        console.log(e);
-        setError(e.message);
-      });
-    */
     setStep(LoadingStep.LOADED_ETH_CONNECTION);
     GameManager.create().then((gm) => {
       window.gm = gm;
@@ -67,7 +38,6 @@ export default function Game() {
     event.preventDefault();
     console.log('coords', coords);
     console.log('tile', tiles[coords.x][coords.y]);
-    // gameManager?.confirmTile(tiles[coords.x][coords.y]);
   };
 
   return (

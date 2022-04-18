@@ -1,7 +1,0 @@
-# Configuration for a Dark Forest universe
-# Defined in TOML as per https://toml.io/en/v0.5.0
-
-[initializers]
-SEED_1=43
-WORLD_WIDTH=100
-WORLD_SCALE=8
