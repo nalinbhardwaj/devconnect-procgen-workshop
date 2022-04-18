@@ -33,7 +33,12 @@ import {
 import { loadCoreContract } from './Blockchain';
 
 export type RawTile = Awaited<ReturnType<TinyWorld['getCachedTile(tuple)']>>;
-export type RawCoords = Awaited<ReturnType<TinyWorld['playerLocation']>>;
+export type RawCoords = {
+  x: EthersBN;
+  y: EthersBN;
+  0: EthersBN;
+  1: EthersBN;
+};
 
 export function decodeCoords(rawCoords: RawCoords): WorldCoords {
   return {
