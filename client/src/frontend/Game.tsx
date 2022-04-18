@@ -102,7 +102,7 @@ export default function Game() {
           <FullScreen>
             <Title>
               <Text h1 size={96} color='secondary'>
-                εxgrasia
+                defcon procgen workshop
               </Text>
             </Title>
             <SubTitle>
