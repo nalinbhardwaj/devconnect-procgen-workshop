@@ -4,7 +4,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 import type {
   TinyWorld,
-  TinyWorldGetters,
   TinyWorldCoreReturn,
   LibraryContracts,
   Perlin,
@@ -30,16 +29,9 @@ async function deploy(_args: {}, hre: HardhatRuntimeEnvironment) {
   const coreAddress = tinyWorldCoreReturn.contract.address;
   console.log('TinyWorldCore deployed to:', coreAddress);
 
-  const tinyWorldGetters: TinyWorldGetters = await hre.run('deploy:getters', {
-    coreAddress,
-  });
-
-  const gettersAddress = tinyWorldGetters.address;
-
   await hre.run('deploy:save', {
     coreBlockNumber: tinyWorldCoreReturn.blockNumber,
     coreAddress,
-    gettersAddress,
   });
 
   // give all contract administration over to an admin address if was provided
@@ -56,7 +48,6 @@ async function deploySave(
   args: {
     coreBlockNumber: number;
     coreAddress: string;
-    gettersAddress: string;
   },
   hre: HardhatRuntimeEnvironment
 ) {
@@ -105,10 +96,6 @@ async function deploySave(
    * The address for the TinyWorld contract.
    */
   export const CORE_CONTRACT_ADDRESS = '${args.coreAddress}';
-  /**
-   * The address for the TinyWorldGetters contract.
-   */
-  export const GETTERS_CONTRACT_ADDRESS = '${args.gettersAddress}';
    `,
     { ...options, parser: 'babel-ts' }
   );
@@ -166,26 +153,6 @@ async function deployCore(
     blockNumber,
     contract: tinyWorldCore,
   };
-}
-
-subtask('deploy:getters', 'deploy and return getters')
-  .addParam('coreAddress', '', undefined, types.string)
-  .setAction(deployGetters);
-
-async function deployGetters(
-  args: {
-    coreAddress: string;
-  },
-  hre: HardhatRuntimeEnvironment
-): Promise<TinyWorldGetters> {
-  return deployProxyWithRetry<TinyWorldGetters>({
-    contractName: 'TinyWorldGetters',
-    signerOrOptions: {},
-    contractArgs: [args.coreAddress],
-    deployOptions: {},
-    retries: 5,
-    hre,
-  });
 }
 
 async function deployProxyWithRetry<C extends Contract>({

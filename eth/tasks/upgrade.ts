@@ -4,7 +4,7 @@ import { FactoryOptions, HardhatRuntimeEnvironment } from 'hardhat/types';
 import { Signer, Contract } from 'ethers';
 import { TransactionMinedTimeout } from '@openzeppelin/upgrades-core';
 
-import type { TinyWorld, TinyWorldGetters } from '../task-types';
+import type { TinyWorld } from '../task-types';
 
 task('upgrade:core', 'upgrade TinyWorld contract (only)').setAction(upgradeCore);
 
@@ -19,26 +19,6 @@ async function upgradeCore({}, hre: HardhatRuntimeEnvironment) {
   await upgradeProxyWithRetry<TinyWorld>({
     contractName: 'TinyWorld',
     contractAddress: CORE_CONTRACT_ADDRESS,
-    signerOrOptions: {},
-    deployOptions: {},
-    retries: 5,
-    hre,
-  });
-}
-
-task('upgrade:getters', 'upgrade TinyWorldGetters contract (only)').setAction(upgradeGetters);
-
-async function upgradeGetters({}, hre: HardhatRuntimeEnvironment) {
-  await hre.run('utils:assertChainId');
-
-  // need to force a compile for tasks
-  await hre.run('compile');
-
-  const { GETTERS_CONTRACT_ADDRESS } = hre.contracts;
-
-  await upgradeProxyWithRetry<TinyWorldGetters>({
-    contractName: 'TinyWorldGetters',
-    contractAddress: GETTERS_CONTRACT_ADDRESS,
     signerOrOptions: {},
     deployOptions: {},
     retries: 5,

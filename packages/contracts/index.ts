@@ -34,7 +34,3 @@ export const START_BLOCK = 0;
  * The address for the TinyWorld contract.
  */
 export const CORE_CONTRACT_ADDRESS = '0x05bc9678C41a3E89cA0ca6D837565a4bCb5D0E5c';
-/**
- * The address for the TinyWorldGetters contract.
- */
-export const GETTERS_CONTRACT_ADDRESS = '0x1aE9623899dDc2bB42217eF985a3d98E6E7623C1';

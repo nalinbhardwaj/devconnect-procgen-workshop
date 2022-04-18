@@ -23,17 +23,12 @@ async function copyAbi(
     JSON.stringify((await hre.artifacts.readArtifact('TinyWorld')).abi),
     { semi: false, parser: 'json' }
   );
-  const gettersAbi = prettier.format(
-    JSON.stringify((await hre.artifacts.readArtifact('TinyWorldGetters')).abi),
-    { semi: false, parser: 'json' }
-  );
   const abisDir = path.join(hre.packageDirs['common-contracts'], 'abis');
 
   await fs.mkdir(abisDir, { recursive: true });
 
   // Save contract ABIs to client
   await fs.writeFile(path.join(abisDir, 'TinyWorld.json'), coreAbi);
-  await fs.writeFile(path.join(abisDir, 'TinyWorldGetters.json'), gettersAbi);
 }
 
 // todo upstream export of task name

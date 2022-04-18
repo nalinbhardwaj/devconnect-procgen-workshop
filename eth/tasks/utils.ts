@@ -1,4 +1,4 @@
-import { TinyWorld, TinyWorldGetters } from '../task-types';
+import { TinyWorld } from '../task-types';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { subtask } from 'hardhat/config';
 
@@ -24,15 +24,4 @@ async function getCore({}, hre: HardhatRuntimeEnvironment): Promise<TinyWorld> {
 
   const tinyWorld = TinyWorldFactory.attach(CORE_CONTRACT_ADDRESS);
   return tinyWorld.connect(deployer) as TinyWorld;
-}
-
-subtask('utils:getGetters', 'get the current getters contract').setAction(getGetters);
-
-async function getGetters({}, hre: HardhatRuntimeEnvironment): Promise<TinyWorldGetters> {
-  const { GETTERS_CONTRACT_ADDRESS } = hre.contracts;
-
-  const [deployer] = await hre.ethers.getSigners();
-  const GettersFactory = await hre.ethers.getContractFactory('TinyWorldGetters');
-  const getters = GettersFactory.attach(GETTERS_CONTRACT_ADDRESS);
-  return getters.connect(deployer) as TinyWorldGetters;
 }

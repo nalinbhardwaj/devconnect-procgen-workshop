@@ -1,4 +1,4 @@
-import { CORE_CONTRACT_ADDRESS, GETTERS_CONTRACT_ADDRESS } from 'common-contracts';
+import { CORE_CONTRACT_ADDRESS } from 'common-contracts';
 import {
   ProveTileContractCallArgs,
   TransitionTileContractCallArgs,
@@ -9,7 +9,7 @@ import {
   address,
   EthAddress,
 } from 'common-types';
-import type { TinyWorld, TinyWorldGetters } from 'common-contracts/typechain';
+import type { TinyWorld } from 'common-contracts/typechain';
 import {
   ContractCaller,
   EthConnection,
@@ -30,7 +30,7 @@ import {
   SubmittedTx,
   UnconfirmedConfirmTile,
 } from '../_types/ContractAPITypes';
-import { loadCoreContract, loadGettersContract } from './Blockchain';
+import { loadCoreContract } from './Blockchain';
 
 export type RawTile = Awaited<ReturnType<TinyWorld['getCachedTile(tuple)']>>;
 export type RawCoords = Awaited<ReturnType<TinyWorld['playerLocation']>>;
@@ -72,10 +72,6 @@ export class ContractsAPI extends EventEmitter {
 
   get coreContract() {
     return this.ethConnection.getContract<TinyWorld>(CORE_CONTRACT_ADDRESS);
-  }
-
-  get gettersContract() {
-    return this.ethConnection.getContract<TinyWorldGetters>(GETTERS_CONTRACT_ADDRESS);
   }
 
   public constructor(ethConnection: EthConnection) {
@@ -175,7 +171,6 @@ export class ContractsAPI extends EventEmitter {
 export async function makeContractsAPI(ethConnection: EthConnection): Promise<ContractsAPI> {
   // Could turn this into an array and iterate, but I like the explicitness
   await ethConnection.loadContract(CORE_CONTRACT_ADDRESS, loadCoreContract);
-  await ethConnection.loadContract(GETTERS_CONTRACT_ADDRESS, loadGettersContract);
 
   return new ContractsAPI(ethConnection);
 }

@@ -1,7 +1,7 @@
 // @ts-ignore because they don't exist before first compile
-import type { TinyWorld, TinyWorldGetters, Perlin } from 'common-contracts/typechain';
+import type { TinyWorld, Perlin } from 'common-contracts/typechain';
 
-export { TinyWorld, TinyWorldGetters, Perlin };
+export { TinyWorld, Perlin };
 export interface TinyWorldCoreReturn {
   blockNumber: number;
   contract: TinyWorld;
