@@ -1,4 +1,4 @@
-# zk-tiny-world
+# defcon procgen workshop
 
 This is a starter repository for Ethereum projects that exposes a handful of
 build and deploy workflows, for developers who want to be able to develop
