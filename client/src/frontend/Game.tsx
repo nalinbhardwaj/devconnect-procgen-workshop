@@ -27,13 +27,14 @@ const enum LoadingStep {
 
 export default function Game() {
   const [gameManager, setGameManager] = useState<GameManager | undefined>();
-  const [ethConnection, setEthConnection] = useState<EthConnection | undefined>();
+  // const [ethConnection, setEthConnection] = useState<EthConnection | undefined>();
   const [step, setStep] = useState(LoadingStep.NONE);
   const [error, setError] = useState('no errors');
   const [tiles, setTiles] = useState<Tile[][]>([]);
   const privateKey = DEV_TEST_PRIVATE_KEY[0];
 
   useEffect(() => {
+    /*
     getEthConnection()
       .then(async (ethConnection) => {
         ethConnection.setAccount(privateKey);
@@ -49,6 +50,14 @@ export default function Game() {
         console.log(e);
         setError(e.message);
       });
+    */
+    setStep(LoadingStep.LOADED_ETH_CONNECTION);
+    GameManager.create().then((gm) => {
+      window.gm = gm;
+      setGameManager(gm);
+      setStep(LoadingStep.LOADED_GAME_MANAGER);
+      setTiles(gm ? gm.getTiles() : []);
+    });
   }, []);
 
   const onGridClick = (
@@ -57,7 +66,8 @@ export default function Game() {
   ) => {
     event.preventDefault();
     console.log('coords', coords);
-    gameManager?.confirmTile(tiles[coords.x][coords.y]);
+    console.log('tile', tiles[coords.x][coords.y]);
+    // gameManager?.confirmTile(tiles[coords.x][coords.y]);
   };
 
   return (

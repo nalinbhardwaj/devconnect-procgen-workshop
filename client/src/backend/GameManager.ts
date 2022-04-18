@@ -19,7 +19,7 @@ class GameManager extends EventEmitter {
    * represented by `undefined` in the case when you want to simply load the game state from the
    * contract and view it without be able to make any moves.
    */
-  private readonly account: EthAddress | undefined;
+  // private readonly account: EthAddress | undefined;
 
   /**
    * Allows us to make contract calls, and execute transactions. Be careful about how you use this
@@ -35,14 +35,14 @@ class GameManager extends EventEmitter {
    *   {@link ContractCaller} and transactions (writes to the blockchain on behalf of the player),
    *   implemented by {@link TxExecutor} via two separately tuned {@link ThrottledConcurrentQueue}s.
    */
-  private readonly contractsAPI: ContractsAPI;
+  // private readonly contractsAPI: ContractsAPI;
 
   /**
    * An interface to the blockchain that is a little bit lower-level than {@link ContractsAPI}. It
    * allows us to do basic operations such as wait for a transaction to complete, check the player's
    * address and balance, etc.
    */
-  private readonly ethConnection: EthConnection;
+  // private readonly ethConnection: EthConnection;
 
   private readonly worldSeed: number;
   private readonly worldWidth: number;
@@ -54,19 +54,19 @@ class GameManager extends EventEmitter {
   private readonly perlinConfig2: PerlinConfig;
 
   private constructor(
-    account: EthAddress | undefined,
-    ethConnection: EthConnection,
-    contractsAPI: ContractsAPI,
+    // account: EthAddress | undefined,
+    // ethConnection: EthConnection,
+    // contractsAPI: ContractsAPI,
     worldSeed: number,
     worldWidth: number,
-    worldScale: number,
-    touchedTiles: Tile[]
+    worldScale: number
+    // touchedTiles: Tile[]
   ) {
     super();
 
-    this.account = account;
-    this.ethConnection = ethConnection;
-    this.contractsAPI = contractsAPI;
+    // this.account = account;
+    // this.ethConnection = ethConnection;
+    // this.contractsAPI = contractsAPI;
     this.worldSeed = worldSeed;
     this.worldWidth = worldWidth;
     this.worldScale = worldScale;
@@ -105,12 +105,15 @@ class GameManager extends EventEmitter {
       }
     }
 
+    /*
     for (let touchedTile of touchedTiles) {
       this.tiles[touchedTile.coords.x][touchedTile.coords.y] = touchedTile;
     }
+    */
   }
 
-  static async create(ethConnection: EthConnection) {
+  static async create(/*ethConnection: EthConnection*/) {
+    /*
     const account = ethConnection.getAddress();
 
     if (!account) {
@@ -122,17 +125,23 @@ class GameManager extends EventEmitter {
     const worldWidth = await contractsAPI.getWorldWidth();
     const worldScale = await contractsAPI.getWorldScale();
     const touchedTiles = await contractsAPI.getTouchedTiles();
+    */
+
+    const worldSeed = 43;
+    const worldWidth = 50;
+    const worldScale = 8;
 
     const gameManager = new GameManager(
-      account,
-      ethConnection,
-      contractsAPI,
+      // account,
+      // ethConnection,
+      // contractsAPI,
       worldSeed,
       worldWidth,
-      worldScale,
-      touchedTiles
+      worldScale
+      // touchedTiles
     );
 
+    /*
     // important that this happens AFTER we load the game state from the blockchain. Otherwise our
     // 'loading game state' contract calls will be competing with events from the blockchain that
     // are happening now, which makes no sense.
@@ -154,10 +163,12 @@ class GameManager extends EventEmitter {
         // todo: remove the tx from localStorage
         gameManager.onTxReverted(unconfirmedTx);
       });
+    */
 
     return gameManager;
   }
 
+  /*
   private onTxIntent(txIntent: TxIntent): void {
     // hook to be called on txIntent initialization
     // pop up a little notification, save txIntent to memory
@@ -197,6 +208,7 @@ class GameManager extends EventEmitter {
     console.log('reverted tx:');
     console.log(tx);
   }
+  */
 
   getWorldSeed(): number {
     return this.worldSeed;
@@ -206,10 +218,15 @@ class GameManager extends EventEmitter {
     return this.worldWidth;
   }
 
+  getWorldScale(): number {
+    return this.worldScale;
+  }
+
   getTiles(): Tile[][] {
     return this.tiles;
   }
 
+  /*
   public async getTouchedTiles(): Promise<Tile[]> {
     return await this.contractsAPI.getTouchedTiles();
   }
@@ -230,6 +247,7 @@ class GameManager extends EventEmitter {
       this.onTxIntentFail(txIntent, err);
     });
   }
+  */
 }
 
 export default GameManager;
