@@ -95,7 +95,7 @@ class GameManager extends EventEmitter {
           perlin(coords, this.perlinConfig1),
           perlin(coords, this.perlinConfig2),
         ];
-        const tileType = seedToTileType(perl[0], perl[1]);
+        const tileType = seedToTileType(coords, perl[0], perl[1]);
         this.tiles[i].push({
           coords: coords,
           perlin: perl,
