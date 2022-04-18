@@ -111,15 +111,13 @@ export class TinyWorldStorage extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
+      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
-      temperatureType: number;
-      altitudeType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
-      2: number;
+      2: BigNumber;
       3: number;
-      4: number;
     }>;
 
     "cachedTiles(uint256,uint256)"(
@@ -128,15 +126,13 @@ export class TinyWorldStorage extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
+      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
-      temperatureType: number;
-      altitudeType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
-      2: number;
+      2: BigNumber;
       3: number;
-      4: number;
     }>;
 
     getCachedTile(
@@ -145,17 +141,13 @@ export class TinyWorldStorage extends Contract {
     ): Promise<{
       0: {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: [BigNumber, BigNumber];
+        perlin: BigNumber;
         raritySeed: BigNumber;
         tileType: number;
-        temperatureType: number;
-        altitudeType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: [BigNumber, BigNumber];
+        1: BigNumber;
         2: BigNumber;
         3: number;
-        4: number;
-        5: number;
       };
     }>;
 
@@ -165,51 +157,39 @@ export class TinyWorldStorage extends Contract {
     ): Promise<{
       0: {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: [BigNumber, BigNumber];
+        perlin: BigNumber;
         raritySeed: BigNumber;
         tileType: number;
-        temperatureType: number;
-        altitudeType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: [BigNumber, BigNumber];
+        1: BigNumber;
         2: BigNumber;
         3: number;
-        4: number;
-        5: number;
       };
     }>;
 
     getTouchedTiles(overrides?: CallOverrides): Promise<{
       0: {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: [BigNumber, BigNumber];
+        perlin: BigNumber;
         raritySeed: BigNumber;
         tileType: number;
-        temperatureType: number;
-        altitudeType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: [BigNumber, BigNumber];
+        1: BigNumber;
         2: BigNumber;
         3: number;
-        4: number;
-        5: number;
       }[];
     }>;
 
     "getTouchedTiles()"(overrides?: CallOverrides): Promise<{
       0: {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: [BigNumber, BigNumber];
+        perlin: BigNumber;
         raritySeed: BigNumber;
         tileType: number;
-        temperatureType: number;
-        altitudeType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: [BigNumber, BigNumber];
+        1: BigNumber;
         2: BigNumber;
         3: number;
-        4: number;
-        5: number;
       }[];
     }>;
 
@@ -296,15 +276,13 @@ export class TinyWorldStorage extends Contract {
     overrides?: CallOverrides
   ): Promise<{
     coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
+    perlin: BigNumber;
     raritySeed: BigNumber;
     tileType: number;
-    temperatureType: number;
-    altitudeType: number;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
     1: BigNumber;
-    2: number;
+    2: BigNumber;
     3: number;
-    4: number;
   }>;
 
   "cachedTiles(uint256,uint256)"(
@@ -313,15 +291,13 @@ export class TinyWorldStorage extends Contract {
     overrides?: CallOverrides
   ): Promise<{
     coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
+    perlin: BigNumber;
     raritySeed: BigNumber;
     tileType: number;
-    temperatureType: number;
-    altitudeType: number;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
     1: BigNumber;
-    2: number;
+    2: BigNumber;
     3: number;
-    4: number;
   }>;
 
   getCachedTile(
@@ -329,17 +305,13 @@ export class TinyWorldStorage extends Contract {
     overrides?: CallOverrides
   ): Promise<{
     coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-    perlin: [BigNumber, BigNumber];
+    perlin: BigNumber;
     raritySeed: BigNumber;
     tileType: number;
-    temperatureType: number;
-    altitudeType: number;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-    1: [BigNumber, BigNumber];
+    1: BigNumber;
     2: BigNumber;
     3: number;
-    4: number;
-    5: number;
   }>;
 
   "getCachedTile(tuple)"(
@@ -347,17 +319,13 @@ export class TinyWorldStorage extends Contract {
     overrides?: CallOverrides
   ): Promise<{
     coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-    perlin: [BigNumber, BigNumber];
+    perlin: BigNumber;
     raritySeed: BigNumber;
     tileType: number;
-    temperatureType: number;
-    altitudeType: number;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-    1: [BigNumber, BigNumber];
+    1: BigNumber;
     2: BigNumber;
     3: number;
-    4: number;
-    5: number;
   }>;
 
   getTouchedTiles(
@@ -365,17 +333,13 @@ export class TinyWorldStorage extends Contract {
   ): Promise<
     {
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: [BigNumber, BigNumber];
+      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
-      temperatureType: number;
-      altitudeType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      1: [BigNumber, BigNumber];
+      1: BigNumber;
       2: BigNumber;
       3: number;
-      4: number;
-      5: number;
     }[]
   >;
 
@@ -384,17 +348,13 @@ export class TinyWorldStorage extends Contract {
   ): Promise<
     {
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: [BigNumber, BigNumber];
+      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
-      temperatureType: number;
-      altitudeType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      1: [BigNumber, BigNumber];
+      1: BigNumber;
       2: BigNumber;
       3: number;
-      4: number;
-      5: number;
     }[]
   >;
 
@@ -457,15 +417,13 @@ export class TinyWorldStorage extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
+      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
-      temperatureType: number;
-      altitudeType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
-      2: number;
+      2: BigNumber;
       3: number;
-      4: number;
     }>;
 
     "cachedTiles(uint256,uint256)"(
@@ -474,15 +432,13 @@ export class TinyWorldStorage extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
+      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
-      temperatureType: number;
-      altitudeType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
-      2: number;
+      2: BigNumber;
       3: number;
-      4: number;
     }>;
 
     getCachedTile(
@@ -490,17 +446,13 @@ export class TinyWorldStorage extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: [BigNumber, BigNumber];
+      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
-      temperatureType: number;
-      altitudeType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      1: [BigNumber, BigNumber];
+      1: BigNumber;
       2: BigNumber;
       3: number;
-      4: number;
-      5: number;
     }>;
 
     "getCachedTile(tuple)"(
@@ -508,17 +460,13 @@ export class TinyWorldStorage extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: [BigNumber, BigNumber];
+      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
-      temperatureType: number;
-      altitudeType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      1: [BigNumber, BigNumber];
+      1: BigNumber;
       2: BigNumber;
       3: number;
-      4: number;
-      5: number;
     }>;
 
     getTouchedTiles(
@@ -526,17 +474,13 @@ export class TinyWorldStorage extends Contract {
     ): Promise<
       {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: [BigNumber, BigNumber];
+        perlin: BigNumber;
         raritySeed: BigNumber;
         tileType: number;
-        temperatureType: number;
-        altitudeType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: [BigNumber, BigNumber];
+        1: BigNumber;
         2: BigNumber;
         3: number;
-        4: number;
-        5: number;
       }[]
     >;
 
@@ -545,17 +489,13 @@ export class TinyWorldStorage extends Contract {
     ): Promise<
       {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: [BigNumber, BigNumber];
+        perlin: BigNumber;
         raritySeed: BigNumber;
         tileType: number;
-        temperatureType: number;
-        altitudeType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: [BigNumber, BigNumber];
+        1: BigNumber;
         2: BigNumber;
         3: number;
-        4: number;
-        5: number;
       }[]
     >;
 

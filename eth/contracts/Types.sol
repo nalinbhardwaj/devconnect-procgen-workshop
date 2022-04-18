@@ -32,11 +32,9 @@ enum AltitudeType {
 
 struct Tile {
     Coords coords;
-    uint256[2] perlin;
+    uint256 perlin;
     uint256 raritySeed;
     TileType tileType;
-    TemperatureType temperatureType;
-    AltitudeType altitudeType;
 }
 
 struct Coords {

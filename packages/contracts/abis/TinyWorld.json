@@ -34,18 +34,9 @@
         "name": "coords",
         "type": "tuple"
       },
+      { "internalType": "uint256", "name": "perlin", "type": "uint256" },
       { "internalType": "uint256", "name": "raritySeed", "type": "uint256" },
-      { "internalType": "enum TileType", "name": "tileType", "type": "uint8" },
-      {
-        "internalType": "enum TemperatureType",
-        "name": "temperatureType",
-        "type": "uint8"
-      },
-      {
-        "internalType": "enum AltitudeType",
-        "name": "altitudeType",
-        "type": "uint8"
-      }
+      { "internalType": "enum TileType", "name": "tileType", "type": "uint8" }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -97,11 +88,7 @@
             "name": "coords",
             "type": "tuple"
           },
-          {
-            "internalType": "uint256[2]",
-            "name": "perlin",
-            "type": "uint256[2]"
-          },
+          { "internalType": "uint256", "name": "perlin", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "raritySeed",
@@ -110,16 +97,6 @@
           {
             "internalType": "enum TileType",
             "name": "tileType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "enum TemperatureType",
-            "name": "temperatureType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "enum AltitudeType",
-            "name": "altitudeType",
             "type": "uint8"
           }
         ],
@@ -156,11 +133,7 @@
             "name": "coords",
             "type": "tuple"
           },
-          {
-            "internalType": "uint256[2]",
-            "name": "perlin",
-            "type": "uint256[2]"
-          },
+          { "internalType": "uint256", "name": "perlin", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "raritySeed",
@@ -169,16 +142,6 @@
           {
             "internalType": "enum TileType",
             "name": "tileType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "enum TemperatureType",
-            "name": "temperatureType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "enum AltitudeType",
-            "name": "altitudeType",
             "type": "uint8"
           }
         ],
@@ -205,11 +168,7 @@
             "name": "coords",
             "type": "tuple"
           },
-          {
-            "internalType": "uint256[2]",
-            "name": "perlin",
-            "type": "uint256[2]"
-          },
+          { "internalType": "uint256", "name": "perlin", "type": "uint256" },
           {
             "internalType": "uint256",
             "name": "raritySeed",
@@ -218,16 +177,6 @@
           {
             "internalType": "enum TileType",
             "name": "tileType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "enum TemperatureType",
-            "name": "temperatureType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "enum AltitudeType",
-            "name": "altitudeType",
             "type": "uint8"
           }
         ],
