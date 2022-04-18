@@ -95,7 +95,7 @@ export class ContractsAPI extends EventEmitter {
     const coords = decodeCoords(rawTile.coords);
     return {
       coords: coords,
-      perlin: rawTile.perlin.toNumber(),
+      perlin: [rawTile.perlin[0].toNumber(), rawTile.perlin[1].toNumber()],
       raritySeed: rawTile.raritySeed.toNumber(),
       tileType: rawTile.tileType,
     };

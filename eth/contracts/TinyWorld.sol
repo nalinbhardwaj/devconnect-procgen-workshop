@@ -26,21 +26,35 @@ contract TinyWorld is OwnableUpgradeable, TinyWorldStorage {
         return uint256(keccak256(abi.encodePacked(coords.x, coords.y))) % 8;
     }
 
-    function seedToTileType(uint256 perlin) internal pure returns (TileType) {
-        return perlin > 30 ? TileType.WATER : TileType.GRASS;
+    function seedToTileType(uint256 perlin1, uint256 perlin2) internal pure returns (TileType) {
+        // Note perlin2 ignored
+        return perlin1 > 30 ? TileType.WATER : TileType.GRASS;
     }
 
     function coordsToTile(Coords memory coords) private view returns (Tile memory) {
-        uint256 perlin = Perlin.computePerlin(
+        uint256 perlin1 = Perlin.computePerlin(
             uint32(coords.x),
             uint32(coords.y),
             uint32(seed),
             uint32(worldScale)
         );
-        uint256 raritySeed = getRaritySeed(coords);
-        TileType tileType = seedToTileType(perlin);
+        uint256 perlin2 = Perlin.computePerlin(
+            uint32(coords.x),
+            uint32(coords.y),
+            uint32(seed + 1),
+            uint32(worldScale)
+        );
 
-        return Tile({coords: coords, perlin: perlin, raritySeed: raritySeed, tileType: tileType});
+        uint256 raritySeed = getRaritySeed(coords);
+        TileType tileType = seedToTileType(perlin1, perlin2);
+
+        return
+            Tile({
+                coords: coords,
+                perlin: [perlin1, perlin2],
+                raritySeed: raritySeed,
+                tileType: tileType
+            });
     }
 
     // Mapping
