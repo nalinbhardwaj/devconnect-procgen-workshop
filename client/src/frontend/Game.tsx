@@ -13,7 +13,7 @@ import {
   TileType,
   WorldCoords,
 } from 'common-types';
-import { tileTypeToColor, nullAddress, prettifyAddress, getRandomMotionMessage } from '../utils';
+import { tileTypeToColor } from '../utils';
 import { useLocation, useParams } from 'react-router-dom';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Tooltip, Text, Loading, Grid, Card } from '@nextui-org/react';

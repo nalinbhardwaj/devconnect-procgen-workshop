@@ -4,7 +4,7 @@ import { perlin, PerlinConfig, getRaritySeed } from 'common-procgen-utils';
 import { address, EthAddress, Tile, WorldCoords } from 'common-types';
 import { EventEmitter } from 'events';
 import { ContractsAPI, makeContractsAPI, RawTile } from './ContractsAPI';
-import { getRandomActionId, nullAddress, seedToTileAttrs } from '../utils';
+import { getRandomActionId, seedToTileAttrs } from '../utils';
 import {
   ContractMethodName,
   ContractsAPIEvent,
