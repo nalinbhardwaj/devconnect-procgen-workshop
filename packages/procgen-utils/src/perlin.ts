@@ -233,15 +233,8 @@ export const MAX_PERLIN_VALUE = 64;
  * @param options An object containing the configuration for the perlin algorithm.
  */
 export function perlin(coords: IntegerVector, options: PerlinConfig) {
-  const octave1 =
+  return (
     (singleOctavePerlin(coords, options.scale, rand(options.seed)) * MAX_PERLIN_VALUE) / 2 +
-    MAX_PERLIN_VALUE / 2;
-  const octave2 =
-    (singleOctavePerlin(coords, options.scale * 2, rand(options.seed)) * MAX_PERLIN_VALUE) / 2 +
-    MAX_PERLIN_VALUE / 2;
-  const octave3 =
-    (singleOctavePerlin(coords, options.scale * 4, rand(options.seed)) * MAX_PERLIN_VALUE) / 2 +
-    MAX_PERLIN_VALUE / 2;
-
-  return (octave1 + 2 * octave2 + 4 * octave3) / 7;
+    MAX_PERLIN_VALUE / 2
+  );
 }

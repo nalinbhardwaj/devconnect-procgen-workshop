@@ -16,17 +16,7 @@ export const tileTypeToColor = {
 };
 
 export const seedToTileType = (perlin: number): TileType => {
-  if (perlin > 40) {
-    return TileType.SNOW;
-  } else if (perlin > 37) {
-    return TileType.STONE;
-  } else if (perlin > 32) {
-    return TileType.GRASS;
-  } else if (perlin > 30) {
-    return TileType.SAND;
-  } else {
-    return TileType.WATER;
-  }
+  return TileType.UNKNOWN;
 };
 
 export const perlinToGreyscaleHex = (perlin: number) => {

@@ -64,7 +64,7 @@ export default function Game() {
                               key={100 * i + j}
                               style={{
                                 backgroundColor: tinycolor(
-                                  tileTypeToColor[tile.tileType]
+                                  perlinToGreyscaleHex(tile.perlin)
                                 ).toHexString(),
                               }}
                               onContextMenu={(event) => onGridClick(event, { x: i, y: j })}
