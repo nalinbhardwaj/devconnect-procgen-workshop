@@ -25,9 +25,7 @@
  * @packageDocumentation
  */
 import { soliditySha3, toBN } from 'web3-utils';
-import { fakeHash, seededRandom } from './fakeHash';
 import { Fraction } from './fractions/bigFraction.js';
-import mimcHash, { modPBigInt, modPBigIntNative } from './mimc';
 import {
   getRandomGradientAt,
   IntegerVector,
@@ -44,16 +42,11 @@ const getRaritySeed = (x: number, y: number) => {
 };
 
 export {
-  mimcHash,
   PerlinConfig,
   IntegerVector,
   perlin,
   rand,
   getRandomGradientAt,
-  modPBigInt,
-  modPBigIntNative,
-  fakeHash,
-  seededRandom,
   Fraction,
   MAX_PERLIN_VALUE,
   getRaritySeed,

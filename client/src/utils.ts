@@ -1,5 +1,3 @@
-import { rand } from 'common-procgen-utils';
-import { mimcWithRounds } from 'common-procgen-utils/dist/mimc';
 import {
   TileType,
   WorldCoords,
