@@ -33,12 +33,7 @@ import {
 import { loadCoreContract } from './Blockchain';
 
 export type RawTile = Awaited<ReturnType<TinyWorld['getCachedTile(tuple)']>>;
-export type RawCoords = {
-  x: EthersBN;
-  y: EthersBN;
-  0: EthersBN;
-  1: EthersBN;
-};
+export type RawCoords = Awaited<ReturnType<TinyWorld['playerLocation']>>;
 
 export function decodeCoords(rawCoords: RawCoords): WorldCoords {
   return {
@@ -100,11 +95,9 @@ export class ContractsAPI extends EventEmitter {
     const coords = decodeCoords(rawTile.coords);
     return {
       coords: coords,
-      perlin: [rawTile.perlin[0].toNumber(), rawTile.perlin[1].toNumber()],
+      perlin: rawTile.perlin.toNumber(),
       raritySeed: rawTile.raritySeed.toNumber(),
       tileType: rawTile.tileType,
-      temperatureType: rawTile.temperatureType,
-      altitudeType: rawTile.altitudeType,
     };
   }
 

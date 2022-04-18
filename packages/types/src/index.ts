@@ -50,11 +50,9 @@ export type WorldCoords = {
 
 export type Tile = {
   coords: WorldCoords;
-  perlin: [number, number];
+  perlin: number;
   raritySeed: number;
   tileType: TileType;
-  temperatureType: TemperatureType;
-  altitudeType: AltitudeType;
 };
 
 /**

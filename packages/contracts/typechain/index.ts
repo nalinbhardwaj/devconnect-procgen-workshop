@@ -3,6 +3,10 @@
 /* eslint-disable */
 export { Erc721UpgradeableFactory } from "./Erc721UpgradeableFactory";
 export type { Erc721Upgradeable } from "./Erc721Upgradeable";
+export { Erc20Factory } from "./Erc20Factory";
+export type { Erc20 } from "./Erc20";
+export { Erc721Factory } from "./Erc721Factory";
+export type { Erc721 } from "./Erc721";
 export { PerlinFactory } from "./PerlinFactory";
 export type { Perlin } from "./Perlin";
 export { TinyWorldFactory } from "./TinyWorldFactory";

@@ -4,7 +4,7 @@ import { perlin, PerlinConfig, getRaritySeed } from 'common-procgen-utils';
 import { address, EthAddress, Tile, WorldCoords } from 'common-types';
 import { EventEmitter } from 'events';
 import { ContractsAPI, makeContractsAPI, RawTile } from './ContractsAPI';
-import { getRandomActionId, seedToTileAttrs } from '../utils';
+import { getRandomActionId, seedToTileType } from '../utils';
 import {
   ContractMethodName,
   ContractsAPIEvent,
@@ -50,8 +50,7 @@ class GameManager extends EventEmitter {
 
   private readonly tiles: Tile[][];
 
-  private readonly perlinConfig1: PerlinConfig;
-  private readonly perlinConfig2: PerlinConfig;
+  private readonly perlinConfig: PerlinConfig;
 
   private constructor(
     account: EthAddress | undefined,
@@ -71,15 +70,8 @@ class GameManager extends EventEmitter {
     this.worldWidth = worldWidth;
     this.worldScale = worldScale;
     this.tiles = [];
-    this.perlinConfig1 = {
+    this.perlinConfig = {
       seed: worldSeed,
-      scale: worldScale,
-      mirrorX: false,
-      mirrorY: false,
-      floor: true,
-    };
-    this.perlinConfig2 = {
-      seed: worldSeed + 1,
       scale: worldScale,
       mirrorX: false,
       mirrorY: false,
@@ -90,17 +82,14 @@ class GameManager extends EventEmitter {
       this.tiles.push([]);
       for (let j = 0; j < worldWidth; j++) {
         const coords = { x: i, y: j };
-        const perl1 = perlin(coords, this.perlinConfig1);
-        const perl2 = perlin(coords, this.perlinConfig2);
         const raritySeed = getRaritySeed(coords.x, coords.y);
-        const tileAttrs = seedToTileAttrs(coords, perl1, perl2);
+        const perl = perlin(coords, this.perlinConfig);
+        const tileType = seedToTileType(perl);
         this.tiles[i].push({
           coords: coords,
-          perlin: [perl1, perl2],
+          perlin: perl,
           raritySeed: raritySeed,
-          tileType: tileAttrs.tileType,
-          temperatureType: tileAttrs.temperatureType,
-          altitudeType: tileAttrs.altitudeType,
+          tileType: tileType,
         });
       }
     }
