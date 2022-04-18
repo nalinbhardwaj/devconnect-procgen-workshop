@@ -1,14 +1,4 @@
-import {
-  TileType,
-  WorldCoords,
-  Tile,
-  AltitudeType,
-  TemperatureType,
-  address,
-  EthAddress,
-} from 'common-types';
-import { ethers } from 'ethers';
-import { keccak256, toUtf8Bytes } from 'ethers/lib/utils';
+import { TileType, WorldCoords, AltitudeType, TemperatureType } from 'common-types';
 
 export const tileTypeToColor = {
   [TileType.UNKNOWN]: 'grey',
@@ -23,21 +13,6 @@ export const tileTypeToColor = {
   [TileType.SNOW]: '#FFFAFA',
   [TileType.STONE]: '#918E85',
   [TileType.ICE]: '#D6FFFA', //
-};
-
-export const getRandomMotionMessage = (): string => {
-  const messages = [
-    ' checking for insects',
-    ' tightening shoelaces',
-    ' eating berries',
-    ' refilling water',
-    ' brushing off dirt',
-    ' testing flashlight',
-    ' wiping sweat beads',
-    ' gripping shoulder straps',
-    ' surveying the lands',
-  ];
-  return messages[Math.floor(Math.random() * messages.length)];
 };
 
 export const seedToTileAttrs = (
@@ -117,30 +92,4 @@ export const getRandomActionId = () => {
     ret += hex[Math.floor(hex.length * Math.random())];
   }
   return ret;
-};
-
-export const nullAddress = address('0x0000000000000000000000000000000000000000');
-
-export const generatePrivateKey = (entropy: string) => {
-  const privateKey = keccak256(toUtf8Bytes(entropy));
-  return privateKey;
-};
-
-const provider = new ethers.providers.InfuraProvider('mainnet', '661cfe1251ae47d2a6cd6d883750f357');
-
-export const fetchENS = async (address: EthAddress) => {
-  return provider.lookupAddress(address);
-};
-
-export const prettifyAddress = async (address: EthAddress) => {
-  const ens = await fetchENS(address);
-  console.log('ens', ens);
-  if (ens) {
-    return ens;
-  }
-  return address.slice(0, 6) + '...' + address.slice(-4);
-};
-
-export const distance = (a: WorldCoords, b: WorldCoords) => {
-  return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 };
