@@ -158,13 +158,11 @@ export class TinyWorld extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
-      2: BigNumber;
-      3: number;
+      2: number;
     }>;
 
     "cachedTiles(uint256,uint256)"(
@@ -173,13 +171,11 @@ export class TinyWorld extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
-      2: BigNumber;
-      3: number;
+      2: number;
     }>;
 
     confirmTile(
@@ -200,11 +196,11 @@ export class TinyWorld extends Contract {
     ): Promise<{
       0: {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: BigNumber;
+        perlin: [BigNumber, BigNumber];
         raritySeed: BigNumber;
         tileType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: BigNumber;
+        1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
       };
@@ -216,11 +212,11 @@ export class TinyWorld extends Contract {
     ): Promise<{
       0: {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: BigNumber;
+        perlin: [BigNumber, BigNumber];
         raritySeed: BigNumber;
         tileType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: BigNumber;
+        1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
       };
@@ -239,11 +235,11 @@ export class TinyWorld extends Contract {
     getTouchedTiles(overrides?: CallOverrides): Promise<{
       0: {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: BigNumber;
+        perlin: [BigNumber, BigNumber];
         raritySeed: BigNumber;
         tileType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: BigNumber;
+        1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
       }[];
@@ -252,11 +248,11 @@ export class TinyWorld extends Contract {
     "getTouchedTiles()"(overrides?: CallOverrides): Promise<{
       0: {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: BigNumber;
+        perlin: [BigNumber, BigNumber];
         raritySeed: BigNumber;
         tileType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: BigNumber;
+        1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
       }[];
@@ -381,13 +377,11 @@ export class TinyWorld extends Contract {
     overrides?: CallOverrides
   ): Promise<{
     coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-    perlin: BigNumber;
     raritySeed: BigNumber;
     tileType: number;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
     1: BigNumber;
-    2: BigNumber;
-    3: number;
+    2: number;
   }>;
 
   "cachedTiles(uint256,uint256)"(
@@ -396,13 +390,11 @@ export class TinyWorld extends Contract {
     overrides?: CallOverrides
   ): Promise<{
     coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-    perlin: BigNumber;
     raritySeed: BigNumber;
     tileType: number;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
     1: BigNumber;
-    2: BigNumber;
-    3: number;
+    2: number;
   }>;
 
   confirmTile(
@@ -422,11 +414,11 @@ export class TinyWorld extends Contract {
     overrides?: CallOverrides
   ): Promise<{
     coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-    perlin: BigNumber;
+    perlin: [BigNumber, BigNumber];
     raritySeed: BigNumber;
     tileType: number;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-    1: BigNumber;
+    1: [BigNumber, BigNumber];
     2: BigNumber;
     3: number;
   }>;
@@ -436,11 +428,11 @@ export class TinyWorld extends Contract {
     overrides?: CallOverrides
   ): Promise<{
     coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-    perlin: BigNumber;
+    perlin: [BigNumber, BigNumber];
     raritySeed: BigNumber;
     tileType: number;
     0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-    1: BigNumber;
+    1: [BigNumber, BigNumber];
     2: BigNumber;
     3: number;
   }>;
@@ -460,11 +452,11 @@ export class TinyWorld extends Contract {
   ): Promise<
     {
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: BigNumber;
+      perlin: [BigNumber, BigNumber];
       raritySeed: BigNumber;
       tileType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      1: BigNumber;
+      1: [BigNumber, BigNumber];
       2: BigNumber;
       3: number;
     }[]
@@ -475,11 +467,11 @@ export class TinyWorld extends Contract {
   ): Promise<
     {
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: BigNumber;
+      perlin: [BigNumber, BigNumber];
       raritySeed: BigNumber;
       tileType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      1: BigNumber;
+      1: [BigNumber, BigNumber];
       2: BigNumber;
       3: number;
     }[]
@@ -576,13 +568,11 @@ export class TinyWorld extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
-      2: BigNumber;
-      3: number;
+      2: number;
     }>;
 
     "cachedTiles(uint256,uint256)"(
@@ -591,13 +581,11 @@ export class TinyWorld extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: BigNumber;
       raritySeed: BigNumber;
       tileType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
       1: BigNumber;
-      2: BigNumber;
-      3: number;
+      2: number;
     }>;
 
     confirmTile(
@@ -617,11 +605,11 @@ export class TinyWorld extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: BigNumber;
+      perlin: [BigNumber, BigNumber];
       raritySeed: BigNumber;
       tileType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      1: BigNumber;
+      1: [BigNumber, BigNumber];
       2: BigNumber;
       3: number;
     }>;
@@ -631,11 +619,11 @@ export class TinyWorld extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: BigNumber;
+      perlin: [BigNumber, BigNumber];
       raritySeed: BigNumber;
       tileType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      1: BigNumber;
+      1: [BigNumber, BigNumber];
       2: BigNumber;
       3: number;
     }>;
@@ -645,11 +633,11 @@ export class TinyWorld extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: BigNumber;
+      perlin: [BigNumber, BigNumber];
       raritySeed: BigNumber;
       tileType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      1: BigNumber;
+      1: [BigNumber, BigNumber];
       2: BigNumber;
       3: number;
     }>;
@@ -659,11 +647,11 @@ export class TinyWorld extends Contract {
       overrides?: CallOverrides
     ): Promise<{
       coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      perlin: BigNumber;
+      perlin: [BigNumber, BigNumber];
       raritySeed: BigNumber;
       tileType: number;
       0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-      1: BigNumber;
+      1: [BigNumber, BigNumber];
       2: BigNumber;
       3: number;
     }>;
@@ -673,11 +661,11 @@ export class TinyWorld extends Contract {
     ): Promise<
       {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: BigNumber;
+        perlin: [BigNumber, BigNumber];
         raritySeed: BigNumber;
         tileType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: BigNumber;
+        1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
       }[]
@@ -688,11 +676,11 @@ export class TinyWorld extends Contract {
     ): Promise<
       {
         coords: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        perlin: BigNumber;
+        perlin: [BigNumber, BigNumber];
         raritySeed: BigNumber;
         tileType: number;
         0: { x: BigNumber; y: BigNumber; 0: BigNumber; 1: BigNumber };
-        1: BigNumber;
+        1: [BigNumber, BigNumber];
         2: BigNumber;
         3: number;
       }[]

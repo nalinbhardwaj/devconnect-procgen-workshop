@@ -34,7 +34,6 @@
         "name": "coords",
         "type": "tuple"
       },
-      { "internalType": "uint256", "name": "perlin", "type": "uint256" },
       { "internalType": "uint256", "name": "raritySeed", "type": "uint256" },
       { "internalType": "enum TileType", "name": "tileType", "type": "uint8" }
     ],
@@ -88,7 +87,11 @@
             "name": "coords",
             "type": "tuple"
           },
-          { "internalType": "uint256", "name": "perlin", "type": "uint256" },
+          {
+            "internalType": "uint256[2]",
+            "name": "perlin",
+            "type": "uint256[2]"
+          },
           {
             "internalType": "uint256",
             "name": "raritySeed",
@@ -133,7 +136,11 @@
             "name": "coords",
             "type": "tuple"
           },
-          { "internalType": "uint256", "name": "perlin", "type": "uint256" },
+          {
+            "internalType": "uint256[2]",
+            "name": "perlin",
+            "type": "uint256[2]"
+          },
           {
             "internalType": "uint256",
             "name": "raritySeed",
@@ -168,7 +175,11 @@
             "name": "coords",
             "type": "tuple"
           },
-          { "internalType": "uint256", "name": "perlin", "type": "uint256" },
+          {
+            "internalType": "uint256[2]",
+            "name": "perlin",
+            "type": "uint256[2]"
+          },
           {
             "internalType": "uint256",
             "name": "raritySeed",

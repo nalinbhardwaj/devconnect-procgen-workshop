@@ -50,7 +50,8 @@ class GameManager extends EventEmitter {
 
   private readonly tiles: Tile[][];
 
-  private readonly perlinConfig: PerlinConfig;
+  private readonly perlinConfig1: PerlinConfig;
+  private readonly perlinConfig2: PerlinConfig;
 
   private constructor(
     account: EthAddress | undefined,
@@ -70,8 +71,15 @@ class GameManager extends EventEmitter {
     this.worldWidth = worldWidth;
     this.worldScale = worldScale;
     this.tiles = [];
-    this.perlinConfig = {
+    this.perlinConfig1 = {
       seed: worldSeed,
+      scale: worldScale,
+      mirrorX: false,
+      mirrorY: false,
+      floor: true,
+    };
+    this.perlinConfig2 = {
+      seed: worldSeed + 1,
       scale: worldScale,
       mirrorX: false,
       mirrorY: false,
@@ -83,8 +91,11 @@ class GameManager extends EventEmitter {
       for (let j = 0; j < worldWidth; j++) {
         const coords = { x: i, y: j };
         const raritySeed = getRaritySeed(coords.x, coords.y);
-        const perl = perlin(coords, this.perlinConfig);
-        const tileType = seedToTileType(perl);
+        const perl: [number, number] = [
+          perlin(coords, this.perlinConfig1),
+          perlin(coords, this.perlinConfig2),
+        ];
+        const tileType = seedToTileType(perl[0], perl[1]);
         this.tiles[i].push({
           coords: coords,
           perlin: perl,
