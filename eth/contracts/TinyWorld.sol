@@ -26,9 +26,72 @@ contract TinyWorld is OwnableUpgradeable, TinyWorldStorage {
         return uint256(keccak256(abi.encodePacked(coords.x, coords.y))) % 8;
     }
 
-    function seedToTileType(uint256 perlin1, uint256 perlin2) internal pure returns (TileType) {
-        // Note perlin2 ignored
-        return perlin1 > 30 ? TileType.WATER : TileType.GRASS;
+    function seedToTileType(
+        Coords memory coords,
+        uint256 perlin1,
+        uint256 perlin2
+    ) internal pure returns (TileType) {
+        uint256 height = perlin1;
+        uint256 temperature = perlin2;
+        temperature = uint256(int256(temperature) + (int256(coords.x) - 50) / 2);
+
+        AltitudeType altitudeType = AltitudeType.SEA;
+        if (height > 40) {
+            altitudeType = AltitudeType.MOUNTAINTOP;
+        } else if (height > 37) {
+            altitudeType = AltitudeType.MOUNTAIN;
+        } else if (height > 32) {
+            altitudeType = AltitudeType.LAND;
+        } else if (height > 30) {
+            altitudeType = AltitudeType.BEACH;
+        }
+
+        TemperatureType temperatureType = TemperatureType.COLD;
+        if (temperature > 42) {
+            temperatureType = TemperatureType.HOT;
+        } else if (temperature > 22) {
+            temperatureType = TemperatureType.NORMAL;
+        }
+
+        TileType tileType = TileType.UNKNOWN;
+        if (temperatureType == TemperatureType.COLD) {
+            if (altitudeType == AltitudeType.MOUNTAINTOP) {
+                tileType = TileType.SNOW;
+            } else if (altitudeType == AltitudeType.MOUNTAIN) {
+                tileType = TileType.SNOW;
+            } else if (altitudeType == AltitudeType.LAND) {
+                tileType = TileType.SNOW;
+            } else if (altitudeType == AltitudeType.BEACH) {
+                tileType = TileType.SNOW;
+            } else {
+                tileType = TileType.WATER;
+            }
+        } else if (temperatureType == TemperatureType.NORMAL) {
+            if (altitudeType == AltitudeType.MOUNTAINTOP) {
+                tileType = TileType.SNOW;
+            } else if (altitudeType == AltitudeType.MOUNTAIN) {
+                tileType = TileType.STONE;
+            } else if (altitudeType == AltitudeType.LAND) {
+                tileType = TileType.GRASS;
+            } else if (altitudeType == AltitudeType.BEACH) {
+                tileType = TileType.SAND;
+            } else {
+                tileType = TileType.WATER;
+            }
+        } else {
+            if (altitudeType == AltitudeType.MOUNTAINTOP) {
+                tileType = TileType.STONE;
+            } else if (altitudeType == AltitudeType.MOUNTAIN) {
+                tileType = TileType.SAND;
+            } else if (altitudeType == AltitudeType.LAND) {
+                tileType = TileType.SAND;
+            } else if (altitudeType == AltitudeType.BEACH) {
+                tileType = TileType.SAND;
+            } else {
+                tileType = TileType.WATER;
+            }
+        }
+        return tileType;
     }
 
     function coordsToTile(Coords memory coords) private view returns (Tile memory) {
@@ -46,7 +109,7 @@ contract TinyWorld is OwnableUpgradeable, TinyWorldStorage {
         );
 
         uint256 raritySeed = getRaritySeed(coords);
-        TileType tileType = seedToTileType(perlin1, perlin2);
+        TileType tileType = seedToTileType(coords, perlin1, perlin2);
 
         return
             Tile({
