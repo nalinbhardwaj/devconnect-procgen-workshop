@@ -50,7 +50,7 @@ export type WorldCoords = {
 
 export type Tile = {
   coords: WorldCoords;
-  perlin: number;
+  perlin: [number, number];
   raritySeed: number;
   tileType: TileType;
 };

@@ -15,8 +15,9 @@ export const tileTypeToColor = {
   [TileType.ICE]: '#D6FFFA', //
 };
 
-export const seedToTileType = (perlin: number): TileType => {
-  return perlin > 30 ? TileType.WATER : TileType.GRASS;
+export const seedToTileType = (perlin1: number, perlin2: number): TileType => {
+  // Note: perlin 2 ignored
+  return perlin1 > 30 ? TileType.WATER : TileType.GRASS;
 };
 
 export const getRandomActionId = () => {
