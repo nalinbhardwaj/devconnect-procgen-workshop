@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import tinycolor from 'tinycolor2';
 import GameManager from '../backend/GameManager';
 import { Tile, TileType, WorldCoords } from 'common-types';
-import { tileTypeToColor } from '../utils';
+import { perlinToGreyscaleHex, tileTypeToColor } from '../utils';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { Tooltip, Text, Loading, Grid, Card } from '@nextui-org/react';
 

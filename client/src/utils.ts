@@ -15,35 +15,28 @@ export const tileTypeToColor = {
   [TileType.ICE]: '#D6FFFA', //
 };
 
-export const seedToTileAttrs = (coords: WorldCoords, perlin: number): TileType => {
-  const height = perlin;
-
-  let altitudeType = AltitudeType.SEA;
-  if (height > 40) {
-    altitudeType = AltitudeType.MOUNTAINTOP;
-  } else if (height > 37) {
-    altitudeType = AltitudeType.MOUNTAIN;
-  } else if (height > 32) {
-    altitudeType = AltitudeType.LAND;
-  } else if (height > 30) {
-    altitudeType = AltitudeType.BEACH;
-  }
-
-  let tileType = TileType.UNKNOWN;
-
-  if (altitudeType === AltitudeType.MOUNTAINTOP) {
-    tileType = TileType.SNOW;
-  } else if (altitudeType === AltitudeType.MOUNTAIN) {
-    tileType = TileType.STONE;
-  } else if (altitudeType === AltitudeType.LAND) {
-    tileType = TileType.GRASS;
-  } else if (altitudeType === AltitudeType.BEACH) {
-    tileType = TileType.SAND;
+export const seedToTileType = (perlin: number): TileType => {
+  if (perlin > 40) {
+    return TileType.SNOW;
+  } else if (perlin > 37) {
+    return TileType.STONE;
+  } else if (perlin > 32) {
+    return TileType.GRASS;
+  } else if (perlin > 30) {
+    return TileType.SAND;
   } else {
-    tileType = TileType.WATER;
+    return TileType.WATER;
   }
+};
 
-  return tileType;
+export const perlinToGreyscaleHex = (perlin: number) => {
+  let val = Math.floor(perlin) * 12 - 192;
+  val = Math.max(Math.min(val, 255), 0);
+  let hexString = val.toString(16);
+  while (hexString.length < 2) {
+    hexString = '0' + hexString;
+  }
+  return `#${hexString}${hexString}${hexString}`;
 };
 
 export const getRandomActionId = () => {

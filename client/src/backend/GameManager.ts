@@ -1,7 +1,7 @@
 import { perlin, PerlinConfig, getRaritySeed } from 'common-procgen-utils';
-import { Tile, WorldCoords } from 'common-types';
+import { Tile, TileType, WorldCoords } from 'common-types';
 import { EventEmitter } from 'events';
-import { seedToTileAttrs } from '../utils';
+import { seedToTileType } from '../utils';
 
 class GameManager extends EventEmitter {
   private readonly worldSeed: number;
@@ -22,7 +22,6 @@ class GameManager extends EventEmitter {
     this.perlinConfig = {
       seed: worldSeed,
       scale: worldScale,
-      floor: true,
     };
 
     for (let i = 0; i < worldWidth; i++) {
@@ -31,12 +30,12 @@ class GameManager extends EventEmitter {
         const coords = { x: i, y: j };
         const perl = perlin(coords, this.perlinConfig);
         const raritySeed = getRaritySeed(coords.x, coords.y);
-        const tileType = seedToTileAttrs(coords, perl);
+        // const tileType = seedToTileType(coords, perl);
         this.tiles[i].push({
           coords: coords,
           perlin: perl,
           raritySeed: raritySeed,
-          tileType: tileType,
+          tileType: seedToTileType(perl),
         });
       }
     }

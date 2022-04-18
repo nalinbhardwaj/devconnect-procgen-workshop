@@ -36,12 +36,6 @@ export interface PerlinConfig {
    * The `PERLIN_LENGTH_SCALE` being used to calculate perlin.
    */
   scale: number;
-  /**
-   * If the resulting perlin should be "floored".
-   *
-   * @default false
-   */
-  floor: boolean;
 }
 
 type HashFn = (...inputs: number[]) => number;
@@ -180,44 +174,54 @@ const realMod = (dividend: Fraction, divisor: Fraction): Fraction => {
   return temp;
 };
 
-const valueAt = (p: Vector, scale: Fraction, randFn: (...inputs: number[]) => number) => {
+const singleOctavePerlin = (
+  p: IntegerVector,
+  scale: number,
+  randFn: (...inputs: number[]) => number
+) => {
+  const fracP = { x: new Fraction(p.x), y: new Fraction(p.y) };
+  const fracScale = new Fraction(scale);
   const bottomLeftCoords = {
-    x: p.x.sub(realMod(p.x, scale)),
-    y: p.y.sub(realMod(p.y, scale)),
+    x: fracP.x.sub(realMod(fracP.x, fracScale)),
+    y: fracP.y.sub(realMod(fracP.y, fracScale)),
   };
   const bottomRightCoords = {
-    x: bottomLeftCoords.x.add(scale),
+    x: bottomLeftCoords.x.add(fracScale),
     y: bottomLeftCoords.y,
   };
   const topLeftCoords = {
     x: bottomLeftCoords.x,
-    y: bottomLeftCoords.y.add(scale),
+    y: bottomLeftCoords.y.add(fracScale),
   };
   const topRightCoords = {
-    x: bottomLeftCoords.x.add(scale),
-    y: bottomLeftCoords.y.add(scale),
+    x: bottomLeftCoords.x.add(fracScale),
+    y: bottomLeftCoords.y.add(fracScale),
   };
 
   const bottomLeftGrad = {
     coords: bottomLeftCoords,
-    gradient: getRandomGradientAt(bottomLeftCoords, scale, randFn),
+    gradient: getRandomGradientAt(bottomLeftCoords, fracScale, randFn),
   };
   const bottomRightGrad = {
     coords: bottomRightCoords,
-    gradient: getRandomGradientAt(bottomRightCoords, scale, randFn),
+    gradient: getRandomGradientAt(bottomRightCoords, fracScale, randFn),
   };
   const topLeftGrad = {
     coords: topLeftCoords,
-    gradient: getRandomGradientAt(topLeftCoords, scale, randFn),
+    gradient: getRandomGradientAt(topLeftCoords, fracScale, randFn),
   };
   const topRightGrad = {
     coords: topRightCoords,
-    gradient: getRandomGradientAt(topRightCoords, scale, randFn),
+    gradient: getRandomGradientAt(topRightCoords, fracScale, randFn),
   };
 
-  const out = perlinValue([bottomLeftGrad, bottomRightGrad, topLeftGrad, topRightGrad], scale, p);
+  const out = perlinValue(
+    [bottomLeftGrad, bottomRightGrad, topLeftGrad, topRightGrad],
+    fracScale,
+    fracP
+  );
 
-  return out;
+  return out.valueOf();
 };
 
 export const MAX_PERLIN_VALUE = 64;
@@ -229,26 +233,15 @@ export const MAX_PERLIN_VALUE = 64;
  * @param options An object containing the configuration for the perlin algorithm.
  */
 export function perlin(coords: IntegerVector, options: PerlinConfig) {
-  let { x, y } = coords;
-  const fractionalP = { x: new Fraction(x), y: new Fraction(y) };
-  let ret = new Fraction(0);
-  const pValues: Fraction[] = [];
-  for (let i = 0; i < 3; i += 1) {
-    // scale must be a power of two, up to 8192
-    pValues.push(valueAt(fractionalP, new Fraction(options.scale * 2 ** i), rand(options.seed)));
-  }
-  ret = ret.add(pValues[0]);
-  ret = ret.add(pValues[0]);
-  ret = ret.add(pValues[1]);
-  ret = ret.add(pValues[2]);
+  const octave1 =
+    (singleOctavePerlin(coords, options.scale, rand(options.seed)) * MAX_PERLIN_VALUE) / 2 +
+    MAX_PERLIN_VALUE / 2;
+  const octave2 =
+    (singleOctavePerlin(coords, options.scale * 2, rand(options.seed)) * MAX_PERLIN_VALUE) / 2 +
+    MAX_PERLIN_VALUE / 2;
+  const octave3 =
+    (singleOctavePerlin(coords, options.scale * 4, rand(options.seed)) * MAX_PERLIN_VALUE) / 2 +
+    MAX_PERLIN_VALUE / 2;
 
-  ret = ret.div(4);
-  runningLCM = updateLCM(runningLCM, BigInt(ret.d));
-
-  ret = ret.mul(MAX_PERLIN_VALUE / 2);
-  if (options.floor) ret = ret.floor();
-  ret = ret.add(MAX_PERLIN_VALUE / 2);
-
-  const out = ret.valueOf();
-  return Math.floor(out * 100) / 100;
+  return (octave1 + 2 * octave2 + 4 * octave3) / 7;
 }
