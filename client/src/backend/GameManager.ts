@@ -10,8 +10,7 @@ class GameManager extends EventEmitter {
 
   private readonly tiles: Tile[][];
 
-  private readonly perlinConfig1: PerlinConfig;
-  private readonly perlinConfig2: PerlinConfig;
+  private readonly perlinConfig: PerlinConfig;
 
   private constructor(worldSeed: number, worldWidth: number, worldScale: number) {
     super();
@@ -20,18 +19,9 @@ class GameManager extends EventEmitter {
     this.worldWidth = worldWidth;
     this.worldScale = worldScale;
     this.tiles = [];
-    this.perlinConfig1 = {
+    this.perlinConfig = {
       seed: worldSeed,
       scale: worldScale,
-      mirrorX: false,
-      mirrorY: false,
-      floor: true,
-    };
-    this.perlinConfig2 = {
-      seed: worldSeed + 1,
-      scale: worldScale,
-      mirrorX: false,
-      mirrorY: false,
       floor: true,
     };
 
@@ -39,25 +29,22 @@ class GameManager extends EventEmitter {
       this.tiles.push([]);
       for (let j = 0; j < worldWidth; j++) {
         const coords = { x: i, y: j };
-        const perl1 = perlin(coords, this.perlinConfig1);
-        const perl2 = perlin(coords, this.perlinConfig2);
+        const perl = perlin(coords, this.perlinConfig);
         const raritySeed = getRaritySeed(coords.x, coords.y);
-        const tileAttrs = seedToTileAttrs(coords, perl1, perl2);
+        const tileType = seedToTileAttrs(coords, perl);
         this.tiles[i].push({
           coords: coords,
-          perlin: [perl1, perl2],
+          perlin: perl,
           raritySeed: raritySeed,
-          tileType: tileAttrs.tileType,
-          temperatureType: tileAttrs.temperatureType,
-          altitudeType: tileAttrs.altitudeType,
+          tileType: tileType,
         });
       }
     }
   }
 
   static async create() {
-    const worldSeed = 43;
-    const worldWidth = 50;
+    const worldSeed = 0;
+    const worldWidth = 100;
     const worldScale = 8;
 
     const gameManager = new GameManager(worldSeed, worldWidth, worldScale);

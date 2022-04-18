@@ -15,14 +15,8 @@ export const tileTypeToColor = {
   [TileType.ICE]: '#D6FFFA', //
 };
 
-export const seedToTileAttrs = (
-  coords: WorldCoords,
-  perlin1: number,
-  perlin2: number
-): { tileType: TileType; altitudeType: AltitudeType; temperatureType: TemperatureType } => {
-  const height = perlin1;
-  let temperature = perlin2;
-  temperature += Math.floor((coords.x - 50) / 2);
+export const seedToTileAttrs = (coords: WorldCoords, perlin: number): TileType => {
+  const height = perlin;
 
   let altitudeType = AltitudeType.SEA;
   if (height > 40) {
@@ -35,53 +29,21 @@ export const seedToTileAttrs = (
     altitudeType = AltitudeType.BEACH;
   }
 
-  let temperatureType = TemperatureType.COLD;
-  if (temperature > 42) {
-    temperatureType = TemperatureType.HOT;
-  } else if (temperature > 22) {
-    temperatureType = TemperatureType.NORMAL;
-  }
-
   let tileType = TileType.UNKNOWN;
 
-  if (temperatureType === TemperatureType.COLD) {
-    if (altitudeType === AltitudeType.MOUNTAINTOP) {
-      tileType = TileType.SNOW;
-    } else if (altitudeType === AltitudeType.MOUNTAIN) {
-      tileType = TileType.SNOW;
-    } else if (altitudeType === AltitudeType.LAND) {
-      tileType = TileType.SNOW;
-    } else if (altitudeType === AltitudeType.BEACH) {
-      tileType = TileType.SNOW;
-    } else {
-      tileType = TileType.WATER;
-    }
-  } else if (temperatureType === TemperatureType.NORMAL) {
-    if (altitudeType === AltitudeType.MOUNTAINTOP) {
-      tileType = TileType.SNOW;
-    } else if (altitudeType === AltitudeType.MOUNTAIN) {
-      tileType = TileType.STONE;
-    } else if (altitudeType === AltitudeType.LAND) {
-      tileType = TileType.GRASS;
-    } else if (altitudeType === AltitudeType.BEACH) {
-      tileType = TileType.SAND;
-    } else {
-      tileType = TileType.WATER;
-    }
+  if (altitudeType === AltitudeType.MOUNTAINTOP) {
+    tileType = TileType.SNOW;
+  } else if (altitudeType === AltitudeType.MOUNTAIN) {
+    tileType = TileType.STONE;
+  } else if (altitudeType === AltitudeType.LAND) {
+    tileType = TileType.GRASS;
+  } else if (altitudeType === AltitudeType.BEACH) {
+    tileType = TileType.SAND;
   } else {
-    if (altitudeType === AltitudeType.MOUNTAINTOP) {
-      tileType = TileType.STONE;
-    } else if (altitudeType === AltitudeType.MOUNTAIN) {
-      tileType = TileType.SAND;
-    } else if (altitudeType === AltitudeType.LAND) {
-      tileType = TileType.SAND;
-    } else if (altitudeType === AltitudeType.BEACH) {
-      tileType = TileType.SAND;
-    } else {
-      tileType = TileType.WATER;
-    }
+    tileType = TileType.WATER;
   }
-  return { tileType, temperatureType, altitudeType };
+
+  return tileType;
 };
 
 export const getRandomActionId = () => {

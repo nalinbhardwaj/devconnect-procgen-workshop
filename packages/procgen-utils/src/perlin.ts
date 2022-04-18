@@ -37,18 +37,6 @@ export interface PerlinConfig {
    */
   scale: number;
   /**
-   * Whether the X coordinate is being mirrored in the perlin calculation.
-   *
-   * @default false
-   */
-  mirrorX: boolean;
-  /**
-   * Whether the Y coordinate is being mirrored in the perlin calculation.
-   *
-   * @default false
-   */
-  mirrorY: boolean;
-  /**
    * If the resulting perlin should be "floored".
    *
    * @default false
@@ -242,8 +230,6 @@ export const MAX_PERLIN_VALUE = 64;
  */
 export function perlin(coords: IntegerVector, options: PerlinConfig) {
   let { x, y } = coords;
-  if (options.mirrorY) x = Math.abs(x); // mirror across the vertical y-axis
-  if (options.mirrorX) y = Math.abs(y); // mirror across the horizontal x-axis
   const fractionalP = { x: new Fraction(x), y: new Fraction(y) };
   let ret = new Fraction(0);
   const pValues: Fraction[] = [];
