@@ -15,7 +15,7 @@ export const tileTypeToColor = {
   [TileType.ICE]: '#D6FFFA', //
 };
 
-const euclidDistance = (coordsA: WorldCoords, coordsB: WorldCoords): number => {
+export const euclidDistance = (coordsA: WorldCoords, coordsB: WorldCoords): number => {
   return Math.floor(
     Math.sqrt(
       (coordsA.x - coordsB.x) * (coordsA.x - coordsB.x) +
@@ -24,19 +24,25 @@ const euclidDistance = (coordsA: WorldCoords, coordsB: WorldCoords): number => {
   );
 };
 
+export const polarAngle = (coordsA: WorldCoords, coordsB: WorldCoords): number => {
+  return (
+    Math.floor((Math.atan2(coordsA.y - coordsB.y, coordsA.x - coordsB.x) * 180) / Math.PI) + 200
+  );
+};
+
 export const seedToTileType = (coords: WorldCoords, perlin1: number, perlin2: number): TileType => {
   let height = perlin1;
   let temperature = perlin2;
-  height += 40 - euclidDistance(coords, { x: 50, y: 50 });
+  temperature += euclidDistance(coords, { x: 50, y: 50 }) - 20;
 
   let altitudeType = AltitudeType.SEA;
   if (height > 40) {
     altitudeType = AltitudeType.MOUNTAINTOP;
   } else if (height > 38) {
     altitudeType = AltitudeType.MOUNTAIN;
-  } else if (height > 30) {
+  } else if (height > 28) {
     altitudeType = AltitudeType.LAND;
-  } else if (height > 22) {
+  } else if (height > 27) {
     altitudeType = AltitudeType.BEACH;
   }
 

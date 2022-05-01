@@ -4,7 +4,7 @@ import { perlin, PerlinConfig, getRaritySeed } from 'common-procgen-utils';
 import { address, EthAddress, Tile, WorldCoords } from 'common-types';
 import { EventEmitter } from 'events';
 import { ContractsAPI, makeContractsAPI, RawTile } from './ContractsAPI';
-import { getRandomActionId, seedToTileType } from '../utils';
+import { euclidDistance, getRandomActionId, polarAngle, seedToTileType } from '../utils';
 import {
   ContractMethodName,
   ContractsAPIEvent,
@@ -91,9 +91,11 @@ class GameManager extends EventEmitter {
       for (let j = 0; j < worldWidth; j++) {
         const coords = { x: i, y: j };
         const raritySeed = getRaritySeed(coords.x, coords.y);
+        const center = { x: 50, y: 50 };
+        const polarCoords = { x: euclidDistance(coords, center), y: polarAngle(coords, center) };
         const perl: [number, number] = [
-          perlin(coords, this.perlinConfig1),
-          perlin(coords, this.perlinConfig2),
+          perlin(polarCoords, this.perlinConfig1),
+          perlin(polarCoords, this.perlinConfig2),
         ];
         const tileType = seedToTileType(coords, perl[0], perl[1]);
         this.tiles[i].push({

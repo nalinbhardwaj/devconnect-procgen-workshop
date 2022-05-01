@@ -88,7 +88,9 @@ export default function Game() {
                                 ).toHexString(),
                               }}
                               onContextMenu={(event) => onGridClick(event, { x: i, y: j })}
-                            />
+                            >
+                              {i == 50 && j == 50 && '👾'}
+                            </GridSquare>
                           );
                         })}
                       </GridRow>
