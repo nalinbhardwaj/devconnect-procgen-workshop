@@ -3,7 +3,8 @@ pragma solidity ^0.8.4;
 
 enum TileType {
     UNKNOWN,
-    WATER,
+    LAVA_A,
+    LAVA_B,
     SAND,
     TREE,
     STUMP,

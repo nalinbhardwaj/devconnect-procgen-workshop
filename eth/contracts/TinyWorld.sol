@@ -64,7 +64,7 @@ contract TinyWorld is OwnableUpgradeable, TinyWorldStorage {
             } else if (altitudeType == AltitudeType.BEACH) {
                 tileType = TileType.SNOW;
             } else {
-                tileType = TileType.WATER;
+                tileType = TileType.LAVA_A;
             }
         } else if (temperatureType == TemperatureType.NORMAL) {
             if (altitudeType == AltitudeType.MOUNTAINTOP) {
@@ -76,7 +76,7 @@ contract TinyWorld is OwnableUpgradeable, TinyWorldStorage {
             } else if (altitudeType == AltitudeType.BEACH) {
                 tileType = TileType.SAND;
             } else {
-                tileType = TileType.WATER;
+                tileType = TileType.LAVA_A;
             }
         } else {
             if (altitudeType == AltitudeType.MOUNTAINTOP) {
@@ -88,7 +88,7 @@ contract TinyWorld is OwnableUpgradeable, TinyWorldStorage {
             } else if (altitudeType == AltitudeType.BEACH) {
                 tileType = TileType.SAND;
             } else {
-                tileType = TileType.WATER;
+                tileType = TileType.LAVA_B;
             }
         }
         return tileType;

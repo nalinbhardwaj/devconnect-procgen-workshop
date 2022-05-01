@@ -13,7 +13,8 @@ import type { Any } from 'ts-toolbelt';
 
 export enum TileType {
   UNKNOWN,
-  WATER,
+  LAVA_A,
+  LAVA_B,
   SAND,
   TREE,
   STUMP,

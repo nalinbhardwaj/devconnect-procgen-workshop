@@ -2,17 +2,18 @@ import { TileType, WorldCoords, AltitudeType, TemperatureType } from 'common-typ
 
 export const tileTypeToColor = {
   [TileType.UNKNOWN]: 'grey',
-  [TileType.WATER]: '#3C91E6',
-  [TileType.SAND]: '#EFDD6F',
+  [TileType.LAVA_A]: '#FE432A',
+  [TileType.LAVA_B]: '#e56520',
+  [TileType.SAND]: '#6F4644',
   [TileType.TREE]: '#0A8754', //
   [TileType.STUMP]: '#0A8754', //
   [TileType.CHEST]: '#53F4FF', //
   [TileType.FARM]: '#0A8754',
   [TileType.WINDMILL]: '#0A8754', //
-  [TileType.GRASS]: '#0A8754',
-  [TileType.SNOW]: '#FFFAFA',
-  [TileType.STONE]: '#918E85',
-  [TileType.ICE]: '#D6FFFA', //
+  [TileType.GRASS]: '#685F70',
+  [TileType.SNOW]: '#1B4745',
+  [TileType.STONE]: '#605898',
+  [TileType.ICE]: '#1B4745', //
 };
 
 export const seedToTileType = (coords: WorldCoords, perlin1: number, perlin2: number): TileType => {
@@ -50,7 +51,7 @@ export const seedToTileType = (coords: WorldCoords, perlin1: number, perlin2: nu
     } else if (altitudeType === AltitudeType.BEACH) {
       tileType = TileType.SNOW;
     } else {
-      tileType = TileType.WATER;
+      tileType = TileType.LAVA_A;
     }
   } else if (temperatureType === TemperatureType.NORMAL) {
     if (altitudeType === AltitudeType.MOUNTAINTOP) {
@@ -62,7 +63,7 @@ export const seedToTileType = (coords: WorldCoords, perlin1: number, perlin2: nu
     } else if (altitudeType === AltitudeType.BEACH) {
       tileType = TileType.SAND;
     } else {
-      tileType = TileType.WATER;
+      tileType = TileType.LAVA_A;
     }
   } else {
     if (altitudeType === AltitudeType.MOUNTAINTOP) {
@@ -74,7 +75,7 @@ export const seedToTileType = (coords: WorldCoords, perlin1: number, perlin2: nu
     } else if (altitudeType === AltitudeType.BEACH) {
       tileType = TileType.SAND;
     } else {
-      tileType = TileType.WATER;
+      tileType = TileType.LAVA_B;
     }
   }
 
