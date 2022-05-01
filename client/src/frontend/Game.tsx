@@ -66,7 +66,7 @@ export default function Game() {
         {gameManager && tiles ? (
           <>
             <FullScreen>
-              <TransformWrapper initialScale={2}>
+              <TransformWrapper initialScale={2} minScale={0.25}>
                 <TransformComponent
                   wrapperStyle={{
                     maxWidth: '100%',
