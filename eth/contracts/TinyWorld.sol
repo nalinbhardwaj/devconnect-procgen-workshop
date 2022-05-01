@@ -8,6 +8,7 @@ import "./TinyWorldStorage.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "hardhat/console.sol";
 import "./Perlin.sol";
+import "abdk-libraries-solidity/ABDKMath64x64.sol";
 
 contract TinyWorld is OwnableUpgradeable, TinyWorldStorage {
     function initialize(
@@ -26,6 +27,24 @@ contract TinyWorld is OwnableUpgradeable, TinyWorldStorage {
         return uint256(keccak256(abi.encodePacked(coords.x, coords.y))) % 8;
     }
 
+    function euclidDistance(Coords memory coordsA, Coords memory coordsB)
+        internal
+        pure
+        returns (int256)
+    {
+        return
+            ABDKMath64x64.toInt(
+                ABDKMath64x64.sqrt(
+                    ABDKMath64x64.fromInt(
+                        (int256(coordsA.x) - int256(coordsB.x)) *
+                            (int256(coordsA.x) - int256(coordsB.x)) +
+                            (int256(coordsA.y) - int256(coordsB.y)) *
+                            (int256(coordsA.y) - int256(coordsB.y))
+                    )
+                )
+            );
+    }
+
     function seedToTileType(
         Coords memory coords,
         uint256 perlin1,
@@ -33,16 +52,17 @@ contract TinyWorld is OwnableUpgradeable, TinyWorldStorage {
     ) internal pure returns (TileType) {
         uint256 height = perlin1;
         uint256 temperature = perlin2;
-        temperature = uint256(int256(temperature) + (int256(coords.x) - 50) / 2);
+        Coords memory center = Coords(50, 50);
+        height += uint256(40 - euclidDistance(coords, center));
 
         AltitudeType altitudeType = AltitudeType.SEA;
         if (height > 40) {
             altitudeType = AltitudeType.MOUNTAINTOP;
-        } else if (height > 37) {
+        } else if (height > 38) {
             altitudeType = AltitudeType.MOUNTAIN;
-        } else if (height > 32) {
-            altitudeType = AltitudeType.LAND;
         } else if (height > 30) {
+            altitudeType = AltitudeType.LAND;
+        } else if (height > 22) {
             altitudeType = AltitudeType.BEACH;
         }
 

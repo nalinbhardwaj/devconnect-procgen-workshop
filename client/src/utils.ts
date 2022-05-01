@@ -15,19 +15,28 @@ export const tileTypeToColor = {
   [TileType.ICE]: '#D6FFFA', //
 };
 
+const euclidDistance = (coordsA: WorldCoords, coordsB: WorldCoords): number => {
+  return Math.floor(
+    Math.sqrt(
+      (coordsA.x - coordsB.x) * (coordsA.x - coordsB.x) +
+        (coordsA.y - coordsB.y) * (coordsA.y - coordsB.y)
+    )
+  );
+};
+
 export const seedToTileType = (coords: WorldCoords, perlin1: number, perlin2: number): TileType => {
-  const height = perlin1;
+  let height = perlin1;
   let temperature = perlin2;
-  temperature += Math.floor((coords.x - 50) / 2);
+  height += 40 - euclidDistance(coords, { x: 50, y: 50 });
 
   let altitudeType = AltitudeType.SEA;
   if (height > 40) {
     altitudeType = AltitudeType.MOUNTAINTOP;
-  } else if (height > 37) {
+  } else if (height > 38) {
     altitudeType = AltitudeType.MOUNTAIN;
-  } else if (height > 32) {
-    altitudeType = AltitudeType.LAND;
   } else if (height > 30) {
+    altitudeType = AltitudeType.LAND;
+  } else if (height > 22) {
     altitudeType = AltitudeType.BEACH;
   }
 
